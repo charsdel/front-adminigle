@@ -1,0 +1,161 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+      
+      HEADER
+    </div>
+
+    <div *ngIf="!selectedMember" class="w-full mb-12 px-4">
+        <div class="w-full mb-12 px-4">
+          <h1>Searchable Pagination</h1>
+          <input #searchTerm (keyup)="search(searchTerm.value)" placeholder="Search bookings..."/>
+        </div>
+        <div
+        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+        >
+        <div class="rounded-t mb-0 px-4 py-3 border-0">
+          <div class="flex flex-wrap items-center">
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+              <h3
+                class="font-semibold text-lg"
+              >
+                Card Tables
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="block w-full overflow-x-auto">
+          <!-- Projects table -->
+          <table class="items-center w-full bg-transparent border-collapse">
+            <thead>
+              <tr>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                    
+                >
+                  ID  
+                </th>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                
+                >
+                  Nombres
+                </th>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                  
+                >
+                  Apellidos
+                </th>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                  
+                >
+                  F. Nacimiento
+                </th>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                  
+                  
+                >
+                  Direccion
+                </th>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                  
+                  
+                >
+                Status
+                </th>
+                <th
+                  class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+                  
+                  
+                >
+               gg
+                </th>
+              
+              </tr>
+            </thead>
+            <tbody>
+              
+
+                  <tr *ngFor="let member of members | paginate: { itemsPerPage: per_page, currentPage: page,totalItems: total}">
+                    <td
+                      class="border-t-0 px-4 border-l-0 border-r-0   p-4"
+                    >
+                    
+                      {{member.memberId}}
+                    </td>
+                    <td
+                      class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+                    >
+                      {{member.name}}
+
+                  </td>
+                    <td
+                      class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+                    >
+                      {{member.last_name}}
+
+                    </td>
+                    <td
+                      class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+                    >
+                      {{member.born}}
+
+                    </td>
+                    <td
+                      class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+                    >
+                     {{member.adress}}
+
+
+                    </td>
+                    <td
+                      class="border-t-0 px-4  border-l-0 border-r-0   p-4 "
+                    >
+                    {{member.status}}
+
+                    </td>
+                    <td
+                    class="border-t-0 px-4  border-l-0 border-r-0   p-4 "
+                    >
+                      
+                    <button [class.selected]="member === selectedMember" type="button" (click)="onSelect(member)">
+                      <span class="badge">Ver </span>
+                    </button> |
+                    <button [class.selected]="member === selectedMember" type="button" (click)="onDelete(member)">
+                      <span class="badge"> Borrar</span>
+                    </button>
+                   
+                    </td>
+                  </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+
+
+        </div>
+        </div>
+
+
+
+    </div>
+
+  </div>
+
+  <div *ngIf="selectedMember">
+
+    
+    <div class="flex flex-wrap">
+      
+      <div class="w-full lg:w-12/12 px-4">
+        <app-card-profile [member] = "selectedMember"
+      ></app-card-profile>
+      </div>
+     
+      
+    </div>
+  
+  </div>
+

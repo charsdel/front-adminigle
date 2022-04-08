@@ -1,0 +1,572 @@
+
+<div
+  class=" relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+>
+  
+  <div class="rounded-t bg-white flex-auto px-4 lg:px-10 py-10 pt-0">
+    <form  (ngSubmit)="onRegister()" #myForm="ngForm">
+
+      <div class="flex justify-between  mb-0  py-6">
+        <div class="text-center">
+          <div>
+            <h4 class="text-blueGray-700 text-xl font-bold text-center">{{ member.name+' '+member.last_name}}</h4>
+            <h6 class="text-blueGray-200 text-xl">{{ member.profession}}</h6>
+          </div>
+        </div>
+
+        <div>
+          <button
+            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-2 py-2 rounded  "
+            type="submit"
+          >
+            guardar
+          </button>
+        </div>
+
+
+      </div>
+      
+      <div class="flex flex-wrap ">
+        <div class="w-full lg:w-12/12  pb-10">
+
+          <div class="flex flex-wrap">
+
+            <div>
+              
+              <img
+              alt="..."
+              src="assets/img/team-2-800x800.jpg"
+              class=" h-40 w-25 rounded-full "
+            />
+            <h6 class="px-10">{{ 'Activo'}}</h6>
+            
+            </div>
+            <div class=" flex-auto place-items-center text-center h-56">
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Direccion:</label>
+                <input
+                  id="adress"
+                  name="adress"
+                  type="text"
+                  [(ngModel)]="member.adress"
+                  [disabled]="inputAdressDisabled"
+                  [ngClass]="
+                
+                  inputAdressDisabled
+                    ? 'border-b-1 px-4 py-0 text-blueGray-600 bg-white w-4/12	'
+                    : 'bg-red-600 border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600   w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('adress')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Correo:</label>
+                <input
+                  id="mail"
+                  name="mail"
+                  type="email"
+                  [(ngModel)]="member.mail"
+                  [disabled]="inputMailDisabled"
+                  [ngClass]="
+                
+                  inputMailDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12	'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('mail')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Telefono:</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  [(ngModel)]="member.phoneNumber"
+                  [disabled]="inputPhoneDisabled"
+                  [ngClass]="
+                
+                  inputPhoneDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12	'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('phone')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Edad:</label>
+                <input
+                  id="age"
+                  name="age"
+                  type="number"
+                  [(ngModel)]="member.age"
+                  [disabled]="inputAgeDisabled"
+                  [ngClass]="
+                
+                  inputAgeDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12	'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('age')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Nacionalidad:</label>
+                <input
+                  id="nationality"
+                  name="nationality"
+                  type="text"
+                  [(ngModel)]="member.nationality"
+                  [disabled]="inputNationalityDisabled"
+                  [ngClass]="
+                
+                  inputNationalityDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12	'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('nationality')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Estado civil:</label>
+                <input
+                  id="civilStatus"
+                  name="civilStatus"
+                  type="text"
+                  [(ngModel)]="member.civilStatus"
+                  [disabled]="inputCivilsDisabled"
+                  [ngClass]="
+                
+                  inputCivilsDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('civilStatus')"
+                  class="fas fa-pen-to-square mr-2 text-sm px-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">sexo:</label>
+                <input
+                  id="gender"
+                  name="gender"
+                  type="text"
+                  [(ngModel)]="member.gender"
+                  [disabled]="inputGenderDisabled"
+                  [ngClass]="
+                
+                  inputGenderDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('gender')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+              <div>
+                <label class=" text-blueGray-600 font-bold mb-2">Fecha de Nacimiento:</label>
+                <input
+                  id="born"
+                  name="born"
+                  type="text"
+                  [(ngModel)]="member.born"
+                  [disabled]="inputBornDisabled"
+                  [ngClass]="
+                
+                  inputBornDisabled
+                    ? 'border-0 px-4 py-0 text-blueGray-600 bg-white w-4/12'
+                    : 'border-0 px-3 py-0 placeholder-blueGray-300 text-blueGray-600 bg-white  w-4/12	 text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150'
+                  "
+                />
+                <i  (click)="toggleInput('born')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1"
+                ></i>
+              </div>
+
+            </div>
+           
+          </div>
+            
+        </div>
+        
+
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password"> Sede</label>
+            <input
+              id="sede"
+              name="sede"
+              type="text"
+              [(ngModel)]="member.sedeName"
+              [disabled]="inputSedeDisabled"
+              [ngClass]="
+            
+              inputSedeDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('sede')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+          
+        
+        </div>
+        
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Red</label>
+            <input
+              id="netName"
+              name="netName"
+              type="text"
+              [(ngModel)]="member.netName"
+              [disabled]="inputNetDisabled"
+              [ngClass]="
+            
+              inputNetDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('net')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Hogar</label>
+            <input
+              id="homeName"
+              name="homeName"
+              type="text"
+              [(ngModel)]="member.homeName"
+              [disabled]="inputHomeDisabled"
+              [ngClass]="
+            
+              inputHomeDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('home')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Ocupacion</label>
+            <input
+              id="occupation"
+              name="occupation"
+              type="text"
+              [(ngModel)]="member.occupation"
+              [disabled]="inputOccupationDisabled"
+              [ngClass]="
+            
+              inputOccupationDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('occupation')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+
+          
+        </div>
+      </div>
+
+      <hr class="mt-6 " />
+      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+        informacion Eclesiastica
+      </h6>
+      <hr class="mt-6 border-b-1 border-blueGray-300 pb-10" />
+
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">F. Nacimiento Espiritual</label>
+            <input
+              id="spiritualBirthDate"
+              name="spiritualBirthDate"
+              type="text"
+              [(ngModel)]="member.spiritualBirthDate"
+              [disabled]="inputSpiritualBdDisabled"
+              [ngClass]="
+            
+              inputSpiritualBdDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'    
+              "
+            />
+            <i  (click)="toggleInput('spiritualBD')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Primera Iglesia</label>
+            <input
+              id="churchBorn"
+              name="churchBorn"
+              type="text"
+              [(ngModel)]="member.churchBorn"
+              [disabled]="inputchurchBornDisabled"
+              [ngClass]="
+            
+              inputchurchBornDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('churchBorn')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-4/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Es bautizado ?</label>
+            <input
+              id="baptized"
+              name="baptized"
+              type="text"
+              [(ngModel)]="member.baptized"
+              [disabled]="inputBaptizedDisabled"
+              [ngClass]="
+            
+              inputBaptizedDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('baptized')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-4/12 px-4">
+
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Bautizmo</label>
+            <input
+              id="christeningDate"
+              name="christeningDate"
+              type="text"
+              [(ngModel)]="member.christeningDate"
+              [disabled]="inputchristeningDateDisabled"
+              [ngClass]="
+            
+              inputchristeningDateDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('christeningDate')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-4/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Iglesia de Bautiso</label>
+            <input
+              id="churchWaterChristening"
+              name="churchWaterChristening"
+              type="text"
+              [(ngModel)]="member.churchWaterChristening"
+
+              [disabled]="inputchurchWcDisabled"
+              [ngClass]="
+            
+              inputchurchWcDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('churchWaterChristening')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+
+          
+        </div>
+      </div>
+
+      <div class="flex flex-wrap">
+        
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">areas de servicio en el PASADO</label>
+            <textarea
+              id="pastServiceArea"
+              name="pastServiceArea"
+              type="text"
+              [(ngModel)]="member.pastServiceArea"
+
+              [disabled]="inputPastServicesDisabled"
+              [ngClass]="
+            
+              inputPastServicesDisabled
+                ? 'border-slate-200 shadow bg-white px-1 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-1 py-3 text-white text-xl rounded w-11/12'
+              "
+            >
+
+            </textarea>
+            <i  (click)="toggleInput('pastServices')"
+              class=" px-2 fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+          
+        </div>
+
+        <div class="w-full lg:w-12/12 px-1">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">areas de servicio en el PRESENTE</label>
+            <textarea
+              id="currentServiceArea"
+              name="currentServiceArea"
+              type="text"
+              [(ngModel)]="member.currentServiceArea"
+
+              [disabled]="inputCurrentServiceAreaDisabled"
+              [ngClass]="
+            
+              inputCurrentServiceAreaDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            >
+
+            </textarea>
+            <i  (click)="toggleInput('CurrentServiceArea')"
+              class=" px-2 fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+
+        </div>
+
+        
+   
+      </div>
+
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+        Estudios
+      </h6>
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Discipulado Aprobado ?</label>
+            <input
+              id="approvedDiscipleships"
+              name="approvedDiscipleships"
+              type="number"
+              [(ngModel)]="member.approvedDiscipleships"
+              [disabled]="inputapprovedDiscipleshipsDisabled"
+              [ngClass]="
+            
+              inputapprovedDiscipleshipsDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            /> 
+            <i  (click)="toggleInput('approvedDiscipleships')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Aprobacion</label>
+            <input
+              id="dicipulateApprovalDate"
+              name="dicipulateApprovalDate"
+              type="text"
+              [(ngModel)]="member.dicipulateApprovalDate"
+              [disabled]="inputdicipulateApprovalDateDisabled"
+              [ngClass]="
+            
+              inputdicipulateApprovalDateDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('dicipulateApprovalDate')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Maestro</label>
+            <input
+              id="discipleshipTeacher"
+              name="discipleshipTeacher"
+              type="text"
+              [(ngModel)]="member.discipleshipTeacher"
+              [disabled]="inputdiscipleshipTeacherDisabled"
+              [ngClass]="
+            
+              inputdiscipleshipTeacherDisabled
+                ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-11/12'
+                : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-11/12'
+              "
+            />
+            <i  (click)="toggleInput('discipleshipTeacher')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1"
+            ></i>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
