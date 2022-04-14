@@ -6,49 +6,49 @@
         <div class="flex flex-wrap">
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <app-card-stats
-              statSubtitle="TRAFFIC"
-              statTitle="350,897"
-              statArrow="up"
-              statPercent="3.48"
+              statSubtitle="MIEMBROS"
+              statTitle= '{{ headerValue.miembros }}'
+              statArrow="DOWN"
+              statPercent="{{ headerValue.porcentaje }}"
               statPercentColor="text-emerald-500"
               statDescripiron="Since last month"
-              statIconName="far fa-chart-bar"
+              statIconName="fas fa-users"
               statIconColor="bg-red-500"
             ></app-card-stats>
           </div>
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <app-card-stats
-              statSubtitle="NEW USERS"
+              statSubtitle="HOMBRES"
               statTitle="2,356"
               statArrow="down"
               statPercent="3.48"
               statPercentColor="text-red-500"
               statDescripiron="Since last week"
-              statIconName="fas fa-chart-pie"
-              statIconColor="bg-orange-500"
+              statIconName="fas fa-male"
+              statIconColor="bg-blue-500"
             ></app-card-stats>
           </div>
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <app-card-stats
-              statSubtitle="SALES"
+              statSubtitle="MUJERES"
               statTitle="924"
               statArrow="down"
               statPercent="1.10"
               statPercentColor="text-orange-500"
               statDescripiron="Since yesterday"
-              statIconName="fas fa-users"
+              statIconName="fas fa-female"
               statIconColor="bg-pink-500"
             ></app-card-stats>
           </div>
           <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
             <app-card-stats
-              statSubtitle="PERFORMANCE"
+              statSubtitle="ACTIVOS"
               statTitle="49,65%"
               statArrow="up"
               statPercent="12"
               statPercentColor="text-emerald-500"
               statDescripiron="Since last month"
-              statIconName="fas fa-percent"
+              statIconName="fas fa-heart-pulse"
               statIconColor="bg-emerald-500"
             ></app-card-stats>
           </div>

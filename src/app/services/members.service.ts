@@ -11,6 +11,8 @@ export class MembersService {
 
   private apiUrl = 'http://admini/api/v1/members';
   private apiSeachUrl = 'http://admini/api/v1/members/search/';
+  private apiUrlStatistics = 'http://admini/api/v1/statictis';
+
 
   private value='';
 
@@ -78,6 +80,12 @@ export class MembersService {
 
     return this.http.get<Member[]>(this.apiSeachUrl + term);
 
+
+  }
+
+  getMemberStatistics()
+  {
+    return this.http.get<any>(this.apiUrlStatistics);
 
   }
 

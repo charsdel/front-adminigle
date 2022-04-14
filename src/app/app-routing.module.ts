@@ -34,8 +34,9 @@ const routes: Routes = [
       component: AdminComponent,
       children: [
         { path: "tables", component: TablesComponent},
-        { path: "profiles", component: ProfilesComponent }
-      
+        { path: "profiles", component: ProfilesComponent },
+        { path: "", component: IndexComponent}
+
 
       ],
 
@@ -52,7 +53,7 @@ const routes: Routes = [
       ],
     },
 
-    { path: "", component: IndexComponent }
+    //{ path: "", component: IndexComponent }
 
 ];
 

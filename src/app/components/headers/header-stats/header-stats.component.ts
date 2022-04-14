@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+
+import { MembersService } from '../../../services/members.service';
+
 
 @Component({
   selector: 'app-header-stats',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderStatsComponent implements OnInit {
 
-  constructor() { }
+  headerValue: any;
+
+  constructor(private membersService: MembersService) { }
 
   ngOnInit(): void {
+
+    this.membersService.getMemberStatistics().subscribe
+    ((response: any) => {
+
+      console.log(response);
+      this.headerValue = response;
+      console.log(this.headerValue.miembros);
+
+    
+
+
+    });
   }
 
 }
