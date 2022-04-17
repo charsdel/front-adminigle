@@ -44,7 +44,7 @@ export class CardPsocialComponent implements OnInit {
     homeName: '',
     occupation: '',
     discipleshipClass: '',
-    approvedDiscipleships: false,
+    approvedDiscipleship: '',
     baptized: ''
 
   } 

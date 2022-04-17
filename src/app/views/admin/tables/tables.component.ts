@@ -86,7 +86,11 @@ export class TablesComponent implements OnInit{
   }
 
   updateBookings(bookings: Member[]) {
-    this.members = bookings;
+
+    if(confirm("Estas seguro de Actualizar este USUARIO")) {
+      this.members = bookings;
+
+    }
   }
 
   getMembersPage (){

@@ -51,20 +51,22 @@ export class MembersService {
   }
 
   updateMemberInfo (member: Member){
+    if(confirm("Estas seguro de Actualizar este USUARIO")) {
 
    const body = { direccion: member.adress,correo: member.mail, telefono: member.phoneNumber,
     edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
     fecha_nac: member.born, sede: member.sedeName,red: member.netName, hvn: member.homeName, ocupacion: member.occupation,
-    fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado: member.baptized,
-    fecha_bautizo: member.churchWaterChristening, iglesia_bautizo_agua: member.churchWaterChristening,
+    fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
+    fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
     fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
-    area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea };
+    area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea,discipulado_aprobado: member.approvedDiscipleship  };
 
     console.log(body);
 
     return this.http.put<any>(this.apiUrl + '/' +member.memberId ,body).subscribe(
       data => this.value = data
     );
+    }
     
   }
 

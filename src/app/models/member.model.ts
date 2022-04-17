@@ -33,7 +33,7 @@ export interface Member {
     homeName: string,
     occupation: string,
     discipleshipClass: string,
-    approvedDiscipleships: boolean,
+    approvedDiscipleship: string,
     baptized: string
 
 }

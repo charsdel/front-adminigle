@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewChild, ElementRef } from '@angular/core';
 import { Member } from '../../../models/member.model';
 import { MembersService } from '../../../services/members.service';
 
@@ -10,18 +10,25 @@ import { MembersService } from '../../../services/members.service';
 })
 export class CardProfileComponent implements OnInit {
 
-  inputAdressDisabled : boolean = true; inputSedeDisabled : boolean = true; inputNetDisabled : boolean = true;
+  inputNameDisabled : boolean = true ;inputProfessionDisabled: boolean = true ;inputAdressDisabled : boolean = true; inputSedeDisabled : boolean = true; inputNetDisabled : boolean = true;
   inputHomeDisabled : boolean = true; inputOccupationDisabled : boolean = true; inputMailDisabled : boolean = true;
   inputPhoneDisabled: boolean = true; inputAgeDisabled: boolean = true;inputNationalityDisabled: boolean = true;
   inputCivilsDisabled: boolean = true; inputGenderDisabled: boolean = true; inputBornDisabled : boolean = true;
   inputSpiritualBdDisabled: boolean = true; inputchurchBornDisabled: boolean = true;inputBaptizedDisabled: boolean = true;
   inputchurchWcDisabled: boolean = true;inputBatizedChurchDisabled: boolean = true;inputPastServicesDisabled: boolean = true;
   inputCurrentServiceAreaDisabled: boolean = true; inputholaDisabled : boolean = true;inputchristeningDateDisabled:boolean = true;
-  inputapprovedDiscipleshipsDisabled: boolean = true; inputdicipulateApprovalDateDisabled : boolean = true; 
-  inputdiscipleshipTeacherDisabled: boolean = true;
+  inputapprovedDiscipleshipDisabled: boolean = true; inputdicipulateApprovalDateDisabled : boolean = true; 
+  inputdiscipleshipTeacherDisabled: boolean = true;inputMemberStatusDisabled: boolean= true;
 
+  @ViewChild("name") name!: ElementRef; @ViewChild("profession") profession!: ElementRef; 
+  @ViewChild("adress") adress!: ElementRef;@ViewChild("mail") mail!: ElementRef;
+  @ViewChild("phone") phone!: ElementRef;@ViewChild("age") age!: ElementRef;
+  @ViewChild("nationality") nationality!: ElementRef;
   
-  
+  @ViewChild("churchBorn") churchBorn!: ElementRef; @ViewChild("churchWaterChristening") churchWaterChristening!: ElementRef;
+  @ViewChild("pastServiceArea") pastServiceArea!: ElementRef; @ViewChild("currentServiceArea") currentServiceArea!: ElementRef;
+  @ViewChild("discipleshipTeacher") discipleshipTeacher!: ElementRef;
+
   value:boolean= true
 
   @Input() member : Member = {
@@ -60,7 +67,7 @@ export class CardProfileComponent implements OnInit {
     homeName: '',
     occupation: '',
     discipleshipClass: '',
-    approvedDiscipleships: false,
+    approvedDiscipleship: '',
     baptized: ''
 
   }
@@ -70,14 +77,16 @@ export class CardProfileComponent implements OnInit {
 
  
 
-  constructor(private membersService: MembersService) { }
+  constructor(private membersService: MembersService) { 
+
+  }
 
   ngOnInit(): void {
   }
 
   
   onRegister() {
-    console.log(this.member);
+    //console.log(this.member);
     this.membersService.updateMemberInfo(this.member);
   }
 
@@ -90,30 +99,63 @@ export class CardProfileComponent implements OnInit {
   toggleInput(inputName: String){
 
 
-    switch(inputName) { 
+    switch(inputName) {
+
+      case "name":{
+        this.inputNameDisabled = !this.inputNameDisabled;
+        setTimeout(()=>{
+          this.name.nativeElement.focus();
+        },0);
+        break;
+      }
+      case "profession":{
+        this.inputProfessionDisabled = !this.inputProfessionDisabled;
+        //permite hacer un delay para poner focus al cursor dentro del input titilando listo para editar
+        setTimeout(()=>{
+        this.profession.nativeElement.focus();
+      },0);
+
+        break;
+      }
+      case "menberStatus":{
+        this.inputMemberStatusDisabled = !this.inputMemberStatusDisabled;
+      
+        break;
+      }
+
       case "adress": { 
         this.inputAdressDisabled = !this.inputAdressDisabled;
-        
+        setTimeout(()=>{
+          this.adress.nativeElement.focus();
+        },0);
        break; 
       } 
       case "mail": { 
         this.inputMailDisabled = !this.inputMailDisabled;
-        
+        setTimeout(()=>{
+          this.mail.nativeElement.focus();
+        },0);
        break; 
       } 
       case "phone": { 
         this.inputPhoneDisabled = !this.inputPhoneDisabled;
-        
+        setTimeout(()=>{
+          this.phone.nativeElement.focus();
+        },0);
        break; 
       } 
       case "age": { 
         this.inputAgeDisabled = !this.inputAgeDisabled;
-        
+        setTimeout(()=>{
+          this.age.nativeElement.focus();
+        },0);
        break; 
       } 
       case "nationality": { 
         this.inputNationalityDisabled = !this.inputNationalityDisabled;
-        
+        setTimeout(()=>{
+          this.nationality.nativeElement.focus();
+        },0)
        break; 
       } 
       case "civilStatus": { 
@@ -158,6 +200,9 @@ export class CardProfileComponent implements OnInit {
 
       case "churchBorn": { 
         this.inputchurchBornDisabled = !this.inputchurchBornDisabled;
+        setTimeout(()=>{
+          this.churchBorn.nativeElement.focus();
+        },0);
        break; 
       }
       case "baptized": { 
@@ -172,21 +217,30 @@ export class CardProfileComponent implements OnInit {
 
       case "churchWaterChristening": { 
         this.inputchurchWcDisabled = !this.inputchurchWcDisabled;
+        setTimeout(()=>{
+          this.churchWaterChristening.nativeElement.focus();
+        },0);
        break; 
       }
 
       case "pastServices": { 
         this.inputPastServicesDisabled = !this.inputPastServicesDisabled;
+        setTimeout(()=>{
+          this.pastServiceArea.nativeElement.focus();
+        },0);
        break; 
       }
 
       case "CurrentServiceArea": { 
         this.inputCurrentServiceAreaDisabled = !this.inputCurrentServiceAreaDisabled;
+        setTimeout(()=>{
+          this.currentServiceArea.nativeElement.focus();
+        },0);
        break; 
       }
 
-      case "approvedDiscipleships": { 
-        this.inputapprovedDiscipleshipsDisabled = !this.inputapprovedDiscipleshipsDisabled;
+      case "approvedDiscipleship": { 
+        this.inputapprovedDiscipleshipDisabled = !this.inputapprovedDiscipleshipDisabled;
        break; 
       }
 
@@ -197,6 +251,9 @@ export class CardProfileComponent implements OnInit {
 
       case "discipleshipTeacher": { 
         this.inputdiscipleshipTeacherDisabled = !this.inputdiscipleshipTeacherDisabled;
+        setTimeout(()=>{
+          this.discipleshipTeacher.nativeElement.focus();
+        },0);
        break; 
       }
 
@@ -206,6 +263,12 @@ export class CardProfileComponent implements OnInit {
       } 
    }
   }
+
+  EnterSubmit(e: { keyCode: number; }){
+    if(e.keyCode === 13){
+       console.log('guardo cambios de formulario usuario');
+    }
+ }
 
   
 
