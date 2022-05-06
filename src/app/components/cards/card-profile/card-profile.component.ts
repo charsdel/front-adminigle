@@ -1,6 +1,10 @@
 import { Component, OnInit, Input,ViewChild, ElementRef } from '@angular/core';
 import { Member } from '../../../models/member.model';
 import { MembersService } from '../../../services/members.service';
+import { HttpHeaders } from '@angular/common/http';
+
+
+
 
 
 @Component({
@@ -9,6 +13,9 @@ import { MembersService } from '../../../services/members.service';
   styleUrls: ['./card-profile.component.css']
 })
 export class CardProfileComponent implements OnInit {
+
+
+  toogleEdit : boolean = false;
 
   inputNameDisabled : boolean = true ;inputProfessionDisabled: boolean = true ;inputAdressDisabled : boolean = true; inputSedeDisabled : boolean = true; inputNetDisabled : boolean = true;
   inputHomeDisabled : boolean = true; inputOccupationDisabled : boolean = true; inputMailDisabled : boolean = true;
@@ -30,6 +37,20 @@ export class CardProfileComponent implements OnInit {
   @ViewChild("discipleshipTeacher") discipleshipTeacher!: ElementRef;
 
   value:boolean= true
+  sedes : any;
+  nets : any;
+  homes: any;
+
+
+
+  //subir imagen
+  url: any; //Angular 11, for stricter type
+	msg = "";
+
+  filedata:any;
+  image:any
+
+
 
   @Input() member : Member = {
 
@@ -71,29 +92,75 @@ export class CardProfileComponent implements OnInit {
     baptized: ''
 
   }
+  http: any;
 
   
 
 
  
+  constructor(private membersService: MembersService) {
 
-  constructor(private membersService: MembersService) { 
-
+    //cargo la imagen de usurio por defecto
   }
+  
 
   ngOnInit(): void {
+    //console.log(this.membersService.get_sedes_nets_homes());
+
+    //asigno una imagen por defecto que tienen el miembro en bd
+    this.url = 'assets/img/users-picture/'+this.member.pictureProfile
+
+    console.log(this.url)
+    this.membersService.get_sedes_nets_homes().subscribe
+    ((response: any) => {
+
+      console.log(response);
+      this.sedes = response['sedes'];
+      this.nets = response['nets'];
+      this.homes = response['homes']; 
+ 
+
+    
+
+
+    });
   }
 
   
   onRegister() {
     //console.log(this.member);
-    this.membersService.updateMemberInfo(this.member);
+    var myFormData = new FormData();
+    const headers = new HttpHeaders();
+
+
+    if(this.filedata != null)
+    {
+      //console.log(this.filedata['name'])
+      this.image = this.filedata['name']; 
+      myFormData.append('image', this.filedata);
+    /* Image Post Request */
+
+      this.membersService.uploadImageProfile(myFormData);
+    }else{
+      console.log('no hay imagen')
+      this.image = 'avatar.png'; 
+
+    }
+    
+
+    this.membersService.updateMemberInfo(this.member,this.image);
+
+    //headers.append('Content-Type', 'multipart/form-data');
+    //headers.append('Accept', 'application/json');
+  
+  
+   
   }
 
  
 
-  toggleInputAdress(){
-    this.inputAdressDisabled = !this.inputAdressDisabled;
+  fToggleEdit(){
+    this.toogleEdit = !this.toogleEdit;
   }
 
   toggleInput(inputName: String){
@@ -268,7 +335,39 @@ export class CardProfileComponent implements OnInit {
     if(e.keyCode === 13){
        console.log('guardo cambios de formulario usuario');
     }
- }
+  }
+
+  showPreview(event: any) {
+    
+    if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+
+    var mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+    this.filedata = event.target.files[0];
+
+		reader.onload = (_event) => {
+			this.msg = "";
+			this.url = reader.result; 
+      //console.log(this.url)
+		}
+
+    //console.log(this.filedata['name']) 
+    
+     
+  }
+
+
+ 
 
   
 

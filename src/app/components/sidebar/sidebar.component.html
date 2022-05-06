@@ -80,7 +80,7 @@
       <ul class="md:flex-col md:min-w-full flex flex-col list-none">
         <li class="items-center">
           <a
-            [routerLink]="['/admin/dashboard']"
+            [routerLink]="['/admin']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
             #adminDashboard="routerLinkActive"
@@ -96,7 +96,7 @@
                 adminDashboard.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Dashboard
+            Inicio
           </a>
         </li>
 
@@ -124,7 +124,7 @@
 
         <li class="items-center">
           <a
-            href="/admin/tables"
+            href="/admin/miembros"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
             #adminTables="routerLinkActive"
@@ -140,7 +140,7 @@
                 adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Tables
+            Miembros
           </a>
         </li>
 

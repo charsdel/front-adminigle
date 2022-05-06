@@ -33,12 +33,13 @@ const routes: Routes = [
       path: "admin",
       component: AdminComponent,
       children: [
-        { path: "tables", component: TablesComponent},
+        { path: "miembros", component: TablesComponent},
         { path: "profiles", component: ProfilesComponent },
         { path: "", component: IndexComponent}
 
 
       ],
+      
 
 
     },

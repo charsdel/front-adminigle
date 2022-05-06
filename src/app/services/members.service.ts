@@ -13,6 +13,14 @@ export class MembersService {
   private apiSeachUrl = 'http://admini/api/v1/members/search/';
   private apiUrlStatistics = 'http://admini/api/v1/statictis';
 
+  //esta direccion la usare para trar todos los hogares, redes y sedes y evitar llamar a base de datos 
+  //tantas veces para cada cosa, la idea es manejar el intercambio de data entre los drops a nivel de codigo
+  private apiUrlschemedrops = 'http://admini/api/v1/schemedrops';
+
+  private apiSaveProfileImage = 'http://admini/api/v1/saveimage';
+
+
+
 
   private value='';
 
@@ -50,18 +58,24 @@ export class MembersService {
     
   }
 
-  updateMemberInfo (member: Member){
+  updateMemberInfo (member: Member,image: string){
     if(confirm("Estas seguro de Actualizar este USUARIO")) {
 
-   const body = { direccion: member.adress,correo: member.mail, telefono: member.phoneNumber,
-    edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
-    fecha_nac: member.born, sede: member.sedeName,red: member.netName, hvn: member.homeName, ocupacion: member.occupation,
-    fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
-    fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
-    fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
-    area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea,discipulado_aprobado: member.approvedDiscipleship  };
+      
+      const body = { nombres: member.name,profesion: member.profession, status: member.status,
+        direccion: member.adress,correo: member.mail,foto: image, telefono: member.phoneNumber,
+        edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
+        fecha_nac: member.born, sede: member.sedeName,red: member.netName, hvn: member.homeName, ocupacion: member.occupation,
+        fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
+        fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
+        fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
+        area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea,discipulado_aprobado: member.approvedDiscipleship  };
+      
 
-    console.log(body);
+
+
+      
+    //console.log(body);
 
     return this.http.put<any>(this.apiUrl + '/' +member.memberId ,body).subscribe(
       data => this.value = data
@@ -89,6 +103,22 @@ export class MembersService {
   {
     return this.http.get<any>(this.apiUrlStatistics);
 
+  }
+
+  get_sedes_nets_homes()
+  {
+    return this.http.get<any[]>(this.apiUrlschemedrops);
+
+  }
+
+  uploadImageProfile (data: any){
+
+
+    this.http.post<any>(this.apiSaveProfileImage, data).subscribe(
+      data => {
+       //Check success message
+       console.log(data);
+      });  
   }
 
     /*

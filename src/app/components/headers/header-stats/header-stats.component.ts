@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { MembersService } from '../../../services/members.service';
 
@@ -10,7 +10,7 @@ import { MembersService } from '../../../services/members.service';
 })
 export class HeaderStatsComponent implements OnInit {
 
-  headerValue: any;
+  headerValue : any = [] ;
 
   constructor(private membersService: MembersService) { }
 

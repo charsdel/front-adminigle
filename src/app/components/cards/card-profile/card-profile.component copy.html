@@ -1,0 +1,128 @@
+
+<div class=" relative bg-slate-50 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg  border-0">
+  
+  <div class="rounded-t  flex-auto px-4 lg:px-10 py-10 pt-0">
+    <form (ngSubmit)="onRegister()" #myForm="ngForm" (keydown)="EnterSubmit($event)" >
+
+      <div class="flex justify-between  mb-0  py-6">
+        <div class="text-center">
+          <div>
+            <input
+              id="name"
+              name="name"
+              #name
+              [(ngModel)]="member.name"
+
+              type="text"
+              [disabled]="inputNameDisabled"
+              [ngClass]="
+            
+              inputNameDisabled
+                ? 'border-b-1 py-0 text-xl font-bold  text-blueGray-700 	 w-10/12	'
+                : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-10/12 ease-linear transition-all duration-150'
+              "
+
+           
+            />
+            <i  (click)="toggleInput('name')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+            ></i>
+          </div>
+
+          <div>
+            <input
+              id="profession"
+              name="profession"
+              [(ngModel)]="member.profession"
+
+              #profession
+              type="text"
+              [disabled]="inputProfessionDisabled"
+
+              [ngClass]="
+            
+              inputProfessionDisabled
+                ? 'border-b-1 py-0 text-xl  text-blueGray-500 	 w-10/12	'
+                : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-10/12 '
+              "
+
+           
+            />
+            
+            <i  (click)="toggleInput('profession')"
+              class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+            ></i>
+          </div>
+
+          
+        </div>
+
+        <div>
+          <button
+            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-2 py-2 rounded  "
+            type="submit"
+          >
+            guardar
+          </button>
+        </div>
+
+
+      </div>
+      
+      <div class="flex flex-wrap ">
+        <div class="w-full lg:w-12/12  pb-10">
+
+          <div class="flex flex-wrap">
+
+            
+            <div>
+              
+              <div style="text-align:center">
+                <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                <div><img [src]="url" *ngIf="url" class=" h-40 w-25 rounded-full" ></div>
+                <p>
+                  <input type="file" (change)="showPreview($event)">
+                </p>
+              </div>
+              
+              <div class="flex-auto w-full">
+
+                <select 
+                    id="memberStatus"
+                    name="menberStatus"
+                    type="text"
+                    [disabled]="inputMemberStatusDisabled"
+                    [ngClass]="
+                  
+                    inputMemberStatusDisabled
+                      ? 'border-b-1 px-4 py-0 text-blueGray-600 w-10/12	'
+                      : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-10/12 ease-linear transition-all duration-150'
+                    ">
+                  
+                    <option>Activo</option>
+                    <option>Inactivo</option>
+                    <option>N. Creyente</option>
+                    <option>Visitante</option>
+                    
+                  </select>
+                  <i  (click)="toggleInput('menberStatus')"
+                      class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+                    ></i>
+              </div>
+            </div>
+           
+           
+          </div>
+            
+        </div>
+        
+
+       
+      </div>   
+
+       
+
+     
+    </form>
+  </div>
+</div>
