@@ -12,7 +12,7 @@ import { Subject } from "rxjs";
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
-  styleUrls: ['./tables.component.css']
+  styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit{
 
@@ -76,7 +76,7 @@ export class TablesComponent implements OnInit{
 
           console.log(response);
           this.members = response.data;
-          this.updateBookings(this.members);
+          //this.updateBookings(this.members);
          
     
     

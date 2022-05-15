@@ -22,6 +22,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 
+//para los toast notificaciones
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -42,6 +45,7 @@ import { LoginComponent } from './views/auth/login/login.component';
 import { RegisterComponent } from './views/auth/register/register.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { AuthNavbarComponent } from './components/navbars/auth-navbar/auth-navbar.component';
+import { ProfileSaveComponent } from './views/admin/profile-save/profile-save.component';
 
 
 
@@ -69,6 +73,7 @@ import { AuthNavbarComponent } from './components/navbars/auth-navbar/auth-navba
     RegisterComponent,
     AuthComponent,
     AuthNavbarComponent,
+    ProfileSaveComponent,
     
 
     
@@ -79,7 +84,10 @@ import { AuthNavbarComponent } from './components/navbars/auth-navbar/auth-navba
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
+
     
   ],
   providers: [

@@ -5,10 +5,21 @@
     </div>
 
     <div *ngIf="!selectedMember" class="w-full mb-12 px-4">
-        <div class="w-full mb-12 px-4">
-          <h1>Searchable Pagination</h1>
-          <input #searchTerm (keyup)="search(searchTerm.value)" placeholder="Search bookings..."/>
+
+        <div class="flex flex-row mb-6 ">
+          <div class="basis-3/4">
+            <input type="text" #searchTerm (keyup)="search(searchTerm.value)" placeholder="Buscar Miembros..." class=" block text-gray-700 text-sm font-bold	"/>
+          </div>
+          
+          <div class="basis-1/4 self-end">
+            <a [routerLink]="['/admin/nuevo-miembro']"
+            class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Agregar +</a>
+
+          </div>
         </div>
+          
+      
+
         <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
         >

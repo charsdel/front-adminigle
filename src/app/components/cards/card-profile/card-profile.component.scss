@@ -1,0 +1,55 @@
+.message-error {
+
+    background: red;
+    color: white;
+    margin: auto;
+    
+    text-align: center;
+   
+
+}
+
+hr{
+    height: 1px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+
+
+.toggle-path {
+    transition: background 0.3s ease-in-out;
+}
+.toggle-circle {
+    top: 0.2rem;
+    left: 0.25rem;
+    transition: all 0.3s ease-in-out;
+}
+input:checked ~ .toggle-circle {
+    transform: translateX(100%);
+}
+input:checked ~ .toggle-path {
+    background-color:#049c09;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .center {
+        margin: auto;
+        width: 65%;
+        padding: 20px;
+      }
+
+
+     
+      
+  }
+
+
+  @media only screen and (min-width: 600px) {
+    .center {
+        margin: auto;
+        width: 80%;
+        padding: 10px;
+        
+    }
+  }  

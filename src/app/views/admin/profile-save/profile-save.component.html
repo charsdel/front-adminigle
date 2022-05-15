@@ -1,0 +1,665 @@
+<div
+  class="relative bg-slate-300 flex flex-col min-w-0 break-words w-full mb-6  rounded-lg bg-blueGray-100 border-0"
+>
+  
+  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <form (ngSubmit)="onSave()" #myForm="ngForm" (keydown)="EnterSubmit($event)">
+
+      <div class="rounded-t mb-0 px-6 py-6">
+        <button
+
+          type="submit"
+          [disabled]="myForm.invalid"
+          [ngClass]="
+                
+                  myForm.invalid
+                    ? ' bg-gray-400 px-2 py-2 text-blueGray-600  font-bold uppercase	text-xs absolute top-5 right-5 rounded'
+                    : 'bg-green-600 text-white  font-bold uppercase  text-xs px-2 py-2 absolute top-5 right-5 rounded '
+                  "
+        >
+          Guardar
+        </button>
+    </div>
+
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+      <h6 class="text-blueGray-400 text-sm mt-3 mb-2 font-bold uppercase">
+        Informacion personal
+      </h6>
+
+      <hr class="mt-2 border-b-1 border-blueGray-300 mb-6" />
+
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-4/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              nombre
+            </label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                [(ngModel)]="member.name"
+                placeholder="Nombre Completo"
+                class="border-0 px-3 py-3 mb-2 placeholder-blueGray-300 text-blueGray-600
+                 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear
+                  transition-all duration-150 lg:w-9/12 w-full"
+
+              />
+
+              <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              Profesion
+            </label>
+            
+            <input
+            id="profession"
+            name="profession"
+            type="text"
+            placeholder="Profesion"
+            [(ngModel)]="member.profession"
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+             bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear
+              transition-all duration-150 lg:w-9/12 w-full"
+            />
+
+            
+            <div class="my-6 center">
+              <img [src]="url" *ngIf="url" class=" .image_placeholder h-40 w-25 rounded-lg" >
+            
+              <input type="file" (change)="showPreview($event)">
+            </div>
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold my-3 "
+              htmlFor="grid-password"
+            >
+              Status
+            </label>
+
+            <select 
+            id="memberStatus"
+            name="menberStatus"
+            [(ngModel)]="member.status"
+            type="text"
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+             bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+              ease-linear transition-all duration-150 lg:w-9/12 w-full mb-8">
+
+            
+            <option selected >Activo</option>
+            <option>Inactivo</option>
+            <option>N. Creyente</option>
+            <option>Visitante</option>
+            
+          </select>
+              
+              
+            
+          
+            
+          </div>
+        </div>
+
+
+     
+
+        <div class="w-full lg:w-8/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              Cedula
+            </label>
+            <input
+              id="nationalId"
+              name="nationalId"
+              [(ngModel)]="member.nationalId"
+              #nationalId = "ngModel"
+              type="text"
+              required
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              Direccion
+            </label>
+            <input
+              id="adress"
+              name="adress"
+              [(ngModel)]="member.adress"
+              #adress
+              type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              Correo
+            </label>
+            <input
+              id="mail"
+              name="mail"
+              [(ngModel)]="member.mail"
+              #mail
+              type="email"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            Telefono
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              [(ngModel)]="member.phoneNumber"
+              #phone
+              type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            Edad
+            </label>
+            <input
+              id="age"
+              name="age"
+              [(ngModel)]="member.age"
+              #age
+              type="number"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            Nacionalidad
+            </label>
+            <input
+              id="nationality"
+              name="nationality"
+              [(ngModel)]="member.nationality"
+              #nationality
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            Estado civil
+            </label>
+            <select
+              id="civilStatus"
+              name="civilStatus"
+              [(ngModel)]="member.civilStatus"
+              type="text"
+              class="border-0 px-3 py-1 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-8 mb-2"
+            >
+              <option value="" disabled selected hidden>Seleccione Opcion</option>
+
+              <option>soltero(a)</option>
+              <option>casado(a)</option>
+              <option>viudo(a)</option>
+              <option>concubinato</option>
+            </select>
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            sexo
+            </label>
+            <select
+              id="gender"
+              name="gender"
+              type="text"
+              [(ngModel)]="member.gender"
+              class="border-0 px-3 py-1 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-8 mb-2"
+            >
+              <option value="" disabled selected hidden>Seleccione Opcion</option>
+
+              <option>masculino</option>
+              <option>femenino</option>
+            </select>
+
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            F. Nacimiento
+            </label>
+            <input
+              id="born"
+              name="born"
+              [(ngModel)]="member.born"
+              type="date"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150 h-4 mb-2"
+            />
+            
+          </div>
+        </div>
+       
+       
+      </div>
+
+     
+
+      <hr class="mt-8 border-b-1 border-blueGray-300" />
+
+      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+        INFORMACION ECLESIASTICA
+      </h6>
+      <hr class=" border-b-1 border-blueGray-300 mb-8"  />
+
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+              Sede
+            </label>
+
+            <select
+            id="sede"
+            name="sede"
+            type="text"
+            [(ngModel)]="member.sedeId"
+            (change)="sedeChange($event)"
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150">
+              <option value="" disabled selected hidden>Seleccione sede</option>
+
+              <option *ngFor="let opt of sedes"
+                [value]="opt.id">{{opt.nombre}}
+              </option>
+          
+            </select>
+            
+          </div>
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            Red <span class="text-sm lowercase font-thin not-italic"> (debe seleccionar primero sede)</span>
+            </label>
+
+            <select
+            id="netName"
+            name="netName"
+            [(ngModel)]="member.netName"
+            (change)="netChange($event)"
+            type="text"
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150">
+                <option value="" disabled selected hidden>Seleccione Red</option>
+                <option *ngFor="let opt of selectedNets" 
+                [value]="opt.id">
+                  {{opt.red}}
+                </option>
+            </select>
+              
+          
+           
+            
+          </div>
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            Hogar<span class="text-sm lowercase font-thin not-italic"> (debe seleccionar primero Red)</span>
+            </label>
+
+            <select
+            id="homeName"
+            name="homeName"
+            [(ngModel)]="member.homeId"
+            type="text"
+            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+               bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                ease-linear transition-all duration-150">
+                <option value="" disabled selected hidden>Seleccione Hogar</option>
+
+                <option *ngFor="let opt of selectedHomes" 
+                [value]="opt.id">
+                  {{opt.hogar}}
+                </option>
+
+            </select>
+              
+          
+           
+            
+          </div>
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Ocupacion</label>
+            <select 
+              id="occupation"
+              name="occupation"
+              [(ngModel)]="member.occupation"
+              type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+              bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+               ease-linear transition-all duration-150">
+  
+               <option value="" disabled selected hidden>Seleccione Ocupacion</option>
+
+                <option>ANCIANO</option>
+                <option>ANFITRIÓN</option>
+                <option>ASISTENTE</option>
+                <option>COPASTOR</option>
+                <option>DISCIPULO</option>
+                <option>LIDER</option>
+                <option>NUEVO</option>
+                <option>PASTOR</option>
+                <option>SERVIDOR</option>
+                <option>VISITANTE</option>
+                <option>OTROS</option>
+  
+               
+            </select>
+            
+          </div>
+  
+          
+        </div>
+
+        <div class="w-full lg:w-6/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">F. Nacimiento Espiritual</label>
+        
+  
+  
+            <input 
+              id="spiritualBirthDate"
+              placeholder="Select date"
+              name="spiritualBirthDate"
+              type="date"
+              value="2018-07-22"
+              min="1940-01-01"
+              max="2030-12-31"
+              [(ngModel)]="member.spiritualBirthDate"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+              bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+               ease-linear transition-all duration-150"/>
+  
+            
+            
+          </div>
+        </div>
+  
+        <div class="w-full lg:w-6/12 px-4">
+  
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Primera Iglesia</label>
+            <input
+              id="churchBorn"
+              name="churchBorn"
+              [(ngModel)]="member.churchBorn"
+              #churchBorn
+              type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+              bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+               ease-linear transition-all duration-150"/>
+  
+            
+            
+          </div>
+        </div>
+  
+       
+
+        <div class="w-full lg:w-4/12 px-4">
+
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Es bautizado ?</label>
+            <select
+              id="baptized"
+              name="baptized"
+              type="text"
+              [(ngModel)]="member.baptized"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+              bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+               ease-linear transition-all duration-150">
+  
+              <option value="" disabled selected hidden>Seleccione Opcion</option>
+
+              <option>Si</option>
+              <option>No</option>
+  
+            </select>
+            
+          </div>
+        </div>
+  
+        <div class="w-full lg:w-4/12 px-4">
+  
+  
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Bautizmo</label>
+            <input
+              id="christeningDate"
+              name="christeningDate"
+              type="date"
+              value=""
+              min="1940-01-01"
+              max="2030-12-31"
+              [(ngModel)]="member.christeningDate"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+              bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+               ease-linear transition-all duration-150"/>
+  
+          
+            
+          </div>
+        </div>
+  
+        <div class="w-full lg:w-4/12 px-4">
+  
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Iglesia de Bautiso</label>
+            <input
+              id="churchWaterChristening"
+              name="churchWaterChristening"
+              #churchWaterChristening
+              type="text"
+              [(ngModel)]="member.churchWaterChristening"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+              bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+               ease-linear transition-all duration-150"/>
+  
+            
+            
+          </div>
+  
+          
+        </div>
+
+          
+
+
+
+
+      </div>
+      
+
+
+      
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            areas de servicio en el PASADO
+            </label>
+            <textarea
+              id="pastServiceArea"
+              name="pastServiceArea"
+              placeholder="puede hablar un poco de sus ocupaciones en el PASADO dentro de la iglesia"
+              #pastServiceArea
+              type="text"
+              [(ngModel)]="member.pastServiceArea"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              rows="4"
+            >
+                  
+                </textarea
+            >
+          </div>
+        </div>
+
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label
+              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+              htmlFor="grid-password"
+            >
+            areas de servicio en el PRESENTE
+            </label>
+            <textarea
+              id="currentServiceArea"
+              name="currentServiceArea"
+              placeholder="puede hablar un poco de sus ocupaciones en el PRESENTE dentro de la iglesia"
+
+              #currentServiceArea
+              type="text"
+              [(ngModel)]="member.currentServiceArea"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              rows="4"
+            >
+                 
+                </textarea
+            >
+          </div>
+        </div>
+        
+
+      </div>
+      <hr class="mt-8 border-b-1 border-blueGray-300" />
+
+        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          Estudios
+        </h6>
+        <hr class=" border-b-1 border-blueGray-300 mb-8"  />
+      
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-4/12 px-4">
+
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Discipulado Aprobado ?</label>
+ 
+              <select
+                id="approvedDiscipleship"
+                name="approvedDiscipleship"
+                type="number"
+                [(ngModel)]="member.approvedDiscipleship"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                  ease-linear transition-all duration-150">
+    
+                  <option value="" disabled selected hidden>Seleccione Opcion</option>
+
+                  <option>Si</option>
+                  <option>No</option>
+      
+              </select>
+            </div>
+  
+          </div>
+  
+          <div class="w-full lg:w-4/12 px-4">
+
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Aprobacion</label>
+              <input
+                id="dicipulateApprovalDate"
+                name="dicipulateApprovalDate"
+                type="date"
+                value=""
+                min="1940-01-01"
+                max="2030-12-31"
+                [(ngModel)]="member.dicipulateApprovalDate"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                  ease-linear transition-all duration-150">  
+              
+            </div>
+
+          
+          </div>
+
+          <div class="w-full lg:w-4/12 px-4">
+
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Maestro</label>
+              <input
+                id="discipleshipTeacher"
+                name="discipleshipTeacher"
+                #discipleshipTeacher
+                type="text"
+                [(ngModel)]="member.discipleshipTeacher"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full
+                  ease-linear transition-all duration-150">
+
+            </div>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

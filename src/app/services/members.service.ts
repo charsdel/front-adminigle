@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 
 import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/member.model';
@@ -58,14 +60,47 @@ export class MembersService {
     
   }
 
-  updateMemberInfo (member: Member,image: string){
+  updateMemberInfo (member: Member,image : string){
     if(confirm("Estas seguro de Actualizar este USUARIO")) {
 
       
-      const body = { nombres: member.name,profesion: member.profession, status: member.status,
+      const body = { cedula:member.nationalId,nombres: member.name,profesion: member.profession, status: member.status,
         direccion: member.adress,correo: member.mail,foto: image, telefono: member.phoneNumber,
         edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
-        fecha_nac: member.born, sede: member.sedeName,red: member.netName, hvn: member.homeName, ocupacion: member.occupation,
+        fecha_nac: member.born, sede_id: member.sedeId,red_id: member.netId,home_id: member.homeId, ocupacion: member.occupation,
+        fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
+        fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
+        fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
+        area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea,discipulado_aprobado: member.approvedDiscipleship  };
+
+
+        this.http.put<any>(this.apiUrl + '/' +member.memberId ,body).subscribe(
+          data =>{
+            this.value = data
+            
+            //console.log(data)
+            
+          } 
+        );
+        return(this.value)
+
+        
+    }
+
+
+  
+    
+  }
+
+
+  saveMemberInfo (member: Member){
+    if(confirm("Estas seguro de Actualizar este USUARIO")) {
+
+      
+      const body = { cedula: member.nationalId,nombres: member.name,profesion: member.profession, status: member.status,
+        direccion: member.adress,correo: member.mail,foto: member.pictureProfile, telefono: member.phoneNumber,
+        edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
+        fecha_nac: member.born, sede_id: member.sedeId, red_id: member.netId, home_id: member.homeId, ocupacion: member.occupation,
         fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
         fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
         fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
@@ -77,9 +112,15 @@ export class MembersService {
       
     //console.log(body);
 
-    return this.http.put<any>(this.apiUrl + '/' +member.memberId ,body).subscribe(
-      data => this.value = data
-    );
+      this.http.post<any>(this.apiUrl ,body).subscribe(
+        data => {
+          this.value = data
+
+          //console.log(data)
+        }
+        
+      );
+      return(this.value)
     }
     
   }
@@ -128,4 +169,7 @@ export class MembersService {
     this.mymember.next(member)
 
   }*/
+
+
+ 
 }

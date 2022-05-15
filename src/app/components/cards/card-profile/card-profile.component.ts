@@ -1,6 +1,9 @@
 import { Component, OnInit, Input,ViewChild, ElementRef } from '@angular/core';
 import { Member } from '../../../models/member.model';
+
 import { MembersService } from '../../../services/members.service';
+import { NotificationService } from '../../../services/notification.service';
+
 import { HttpHeaders } from '@angular/common/http';
 
 
@@ -10,13 +13,17 @@ import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-card-profile',
   templateUrl: './card-profile.component.html',
-  styleUrls: ['./card-profile.component.css']
+  styleUrls: ['./card-profile.component.scss']
 })
 export class CardProfileComponent implements OnInit {
 
 
-  toogleEdit : boolean = false;
-
+  toogleEdit : boolean = true;
+  
+  
+  //para hacer e bloqueo individual de campos y el @viewchild es para activar el onfocus en la propiedad y titile el cursor dentro del input
+  /*
+  inputnationalIdDisabled : boolean = true;
   inputNameDisabled : boolean = true ;inputProfessionDisabled: boolean = true ;inputAdressDisabled : boolean = true; inputSedeDisabled : boolean = true; inputNetDisabled : boolean = true;
   inputHomeDisabled : boolean = true; inputOccupationDisabled : boolean = true; inputMailDisabled : boolean = true;
   inputPhoneDisabled: boolean = true; inputAgeDisabled: boolean = true;inputNationalityDisabled: boolean = true;
@@ -27,6 +34,7 @@ export class CardProfileComponent implements OnInit {
   inputapprovedDiscipleshipDisabled: boolean = true; inputdicipulateApprovalDateDisabled : boolean = true; 
   inputdiscipleshipTeacherDisabled: boolean = true;inputMemberStatusDisabled: boolean= true;
 
+  @ViewChild("nationalId") nationalId!: ElementRef;
   @ViewChild("name") name!: ElementRef; @ViewChild("profession") profession!: ElementRef; 
   @ViewChild("adress") adress!: ElementRef;@ViewChild("mail") mail!: ElementRef;
   @ViewChild("phone") phone!: ElementRef;@ViewChild("age") age!: ElementRef;
@@ -34,12 +42,15 @@ export class CardProfileComponent implements OnInit {
   
   @ViewChild("churchBorn") churchBorn!: ElementRef; @ViewChild("churchWaterChristening") churchWaterChristening!: ElementRef;
   @ViewChild("pastServiceArea") pastServiceArea!: ElementRef; @ViewChild("currentServiceArea") currentServiceArea!: ElementRef;
-  @ViewChild("discipleshipTeacher") discipleshipTeacher!: ElementRef;
+  @ViewChild("discipleshipTeacher") discipleshipTeacher!: ElementRef;*/
 
   value:boolean= true
-  sedes : any;
-  nets : any;
-  homes: any;
+  sedes: Array<any> = [];  
+  nets : Array<any> = []
+  selectedNets: Array<any> = []
+  selectedHomes: Array<any> = []
+
+  homes: Array<any> = []
 
 
 
@@ -98,7 +109,7 @@ export class CardProfileComponent implements OnInit {
 
 
  
-  constructor(private membersService: MembersService) {
+  constructor(private membersService: MembersService,private notifyService : NotificationService) {
 
     //cargo la imagen de usurio por defecto
   }
@@ -110,22 +121,41 @@ export class CardProfileComponent implements OnInit {
     //asigno una imagen por defecto que tienen el miembro en bd
     this.url = 'assets/img/users-picture/'+this.member.pictureProfile
 
-    console.log(this.url)
+    //console.log(this.member)
     this.membersService.get_sedes_nets_homes().subscribe
     ((response: any) => {
 
-      console.log(response);
+      //console.log(response);
       this.sedes = response['sedes'];
       this.nets = response['nets'];
       this.homes = response['homes']; 
  
-
+      //console.log(this.nets);
     
+      this.selectedNets =  this.setSelectNets(this.member.sedeId,this.nets);
+      this.selectedHomes =  this.setSelectHomes(this.member.netId);
 
+      //console.log(this.selectedHomes);
 
     });
+
+    
+    //console.log(this.selectedNets)
+
+    
   }
 
+
+ 
+    
+    
+    showToasterInfo(){
+        this.notifyService.showInfo("This is info", "tutsmake.com")
+    }
+    
+    showToasterWarning(){
+        this.notifyService.showWarning("This is warning", "tutsmake.com")
+    }
   
   onRegister() {
     //console.log(this.member);
@@ -143,12 +173,28 @@ export class CardProfileComponent implements OnInit {
       this.membersService.uploadImageProfile(myFormData);
     }else{
       console.log('no hay imagen')
-      this.image = 'avatar.png'; 
-
+      if(this.member.pictureProfile == 'avatar.png')
+      {
+        this.image = 'avatar.png'; 
+      }else{
+        this.image = this.member.pictureProfile
+      }
     }
     
 
-    this.membersService.updateMemberInfo(this.member,this.image);
+
+
+    //console.log(this.image)
+    const resul = this.membersService.updateMemberInfo(this.member,this.image);
+
+
+    console.log(resul)
+    if(resul == 'ok')
+    {
+      this.notifyService.showSuccess("Actualizado con Exito", "IgleSoft.com")
+    }else{
+      this.notifyService.showError("Error al Actualizar", "IgleSoft.com")
+    }
 
     //headers.append('Content-Type', 'multipart/form-data');
     //headers.append('Accept', 'application/json');
@@ -161,13 +207,25 @@ export class CardProfileComponent implements OnInit {
 
   fToggleEdit(){
     this.toogleEdit = !this.toogleEdit;
+   
+
   }
 
+
+  //disabled individual de las propiedades
+  /*
   toggleInput(inputName: String){
 
 
     switch(inputName) {
 
+      case "nationalId":{
+        this.inputnationalIdDisabled = !this.inputnationalIdDisabled;
+        setTimeout(()=>{
+          this.name.nativeElement.focus();
+        },0);
+        break;
+      }
       case "name":{
         this.inputNameDisabled = !this.inputNameDisabled;
         setTimeout(()=>{
@@ -329,7 +387,7 @@ export class CardProfileComponent implements OnInit {
          break;              
       } 
    }
-  }
+  }*/
 
   EnterSubmit(e: { keyCode: number; }){
     if(e.keyCode === 13){
@@ -366,6 +424,101 @@ export class CardProfileComponent implements OnInit {
      
   }
 
+  //cuando las sedes cambian en el select se debe buscar las redes que le corresponden
+  sedeChange(selectValue: any)
+  {
+
+    
+    const sedeId = selectValue.target.value;
+
+    this.selectedNets = []
+    for (let net of this.nets){
+
+      if (net['sede_id'] == sedeId) {
+
+        this.selectedNets.push(net)
+      }
+      
+    }
+
+    this.member.netId = this.selectedNets[0].id
+
+    return (this.selectedNets)
+    
+  }
+
+  
+
+
+  //redes que corresponden a la sede del usuario al iniciar la vista de talle
+  setSelectNets(sedeId: String,nets: any)
+  {
+
+   //console.log(nets)
+
+    for(let net of this.nets){
+
+      //console.log(net['id'])
+      //console.log(sedeId)
+      if (net['sede_id'] == sedeId) {
+
+        this.selectedNets.push(net)
+        //console.log(this.selectedNets);
+      }
+      
+    }
+
+    return (this.selectedNets)
+    
+  }
+
+
+   //Hoageres que corresponden a la red del usuario al iniciar la vista detalle
+   setSelectHomes(netId: String)
+   {
+ 
+    //console.log(this.homes)
+ 
+     for(let home of this.homes){
+ 
+       //console.log(net['id'])
+       //console.log(sedeId)
+       if (home['net_id'] == netId) {
+ 
+         this.selectedHomes.push(home)
+         //console.log(this.selectedNets);
+       }
+       
+     }
+ 
+   // console.log(this.selectedHomes)
+     return (this.selectedHomes)
+     
+   }
+
+
+   //cuando las redes cambian en el select se debe buscar las hogares que le corresponden
+  netChange(selectValue: any)
+  {
+
+    
+    const netId = selectValue.target.value;
+
+    this.selectedHomes = []
+    for (let home of this.homes){
+
+      if (home['net_id'] == netId) {
+
+        this.selectedHomes.push(home)
+      }
+      
+    }
+
+    this.member.homeId = this.selectedHomes[0].id
+
+    return (this.selectedHomes)
+    
+  }
 
  
 
