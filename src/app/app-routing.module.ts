@@ -15,6 +15,8 @@ import { TablesComponent } from "./views/admin/tables/tables.component";
 //adminviews
 
 import { ProfilesComponent } from "./views/admin/profiles/profiles.component";
+import { ProfileSaveComponent} from "./views/admin/profile-save/profile-save.component";
+
 
 // no layouts views
 import { IndexComponent } from "./views/index/index.component";
@@ -25,6 +27,11 @@ import { IndexComponent } from "./views/index/index.component";
 import { LoginComponent } from "./views/auth/login/login.component";
 import { RegisterComponent } from "./views/auth/register/register.component";
 
+
+//authguard para redireccionar si no esta logueado 
+
+import { AuthGuard } from './services/auth.guard';
+
 const routes: Routes = [
 
 
@@ -33,8 +40,10 @@ const routes: Routes = [
       path: "admin",
       component: AdminComponent,
       children: [
-        { path: "miembros", component: TablesComponent},
-        { path: "profiles", component: ProfilesComponent },
+        { path: "miembros", component: TablesComponent,canActivate: [AuthGuard]},
+        { path: "profiles", component: ProfilesComponent,canActivate: [AuthGuard] },
+        { path: "nuevo-miembro", component: ProfileSaveComponent,canActivate: [AuthGuard] },
+
         { path: "", component: IndexComponent}
 
 
