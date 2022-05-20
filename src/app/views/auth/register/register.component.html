@@ -33,11 +33,14 @@
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
             <!-- Errors -->
-            <div *ngIf="errors?.name" class="alert alert-danger mt-3">
-              {{ errors?.name }}
+            <div *ngIf="errors?.username" class="alert alert-danger mt-3">
+              {{ errors?.username }}
             </div>
             <div *ngIf="errors?.email" class="alert alert-danger mt-3">
               {{ errors?.email }}
+            </div>
+            <div *ngIf="errors?.name" class="alert alert-danger mt-3">
+              {{ errors?.name }}
             </div>
             <div *ngIf="errors?.password" class="alert alert-danger mt-3">
               {{ errors?.password }}
@@ -52,13 +55,13 @@
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                 htmlFor="grid-password"
               >
-                Name
+                User Name
               </label>
               <input
-                formControlName="name" 
-                type="email"
+                formControlName="username" 
+                type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="Name"
+                placeholder="Nombre de usuario"
               />
             </div>
 
@@ -74,6 +77,21 @@
                 type="email"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Email"
+              />
+            </div>
+
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Name
+              </label>
+              <input
+                formControlName="name" 
+                type="email"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Name"
               />
             </div>
 

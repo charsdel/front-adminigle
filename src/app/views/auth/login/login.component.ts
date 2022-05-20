@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private authState: AuthStateService
   ) {
     this.loginForm = this.fb.group({
-      email: [],
+      username: [],
       password: [],
     });
   }

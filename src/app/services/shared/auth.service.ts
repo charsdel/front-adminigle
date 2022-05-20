@@ -4,8 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class User {
-  name!: String;
+  username!: String;
   email!: String;
+  name!: String;
   password!: String;
   password_confirmation!: String;
 }
@@ -20,6 +21,11 @@ export class AuthService {
 
 
   constructor(private http: HttpClient) {}
+
+
+  //se hace el proceso de login simultaneo en dos api con el mismo usuario para simular que es una misma
+
+  //registro y login en el api de laravel 
   // User registration
   register(user: User): Observable<any> {
     return this.http.post(this.apiUrlRegister, user);
@@ -28,6 +34,10 @@ export class AuthService {
   signin(user: User): Observable<any> {
     return this.http.post<any>(this.apiUrlLogin, user);
   }
+
+
+  //registro y login en el api de worpress  
+
 
   /*
   // Access user profile
