@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from '../../../models/member.model';
 
 import { MembersService } from '../../../services/members.service';
-import { Subject } from "rxjs";
+import { debounce, debounceTime, distinctUntilChanged, filter, map, Subject, tap } from "rxjs";
+import { FormControl } from '@angular/forms';
 
 
 
@@ -25,6 +26,7 @@ export class TablesComponent implements OnInit{
   members : Member [] = [];
   links: any;
   meta: any;
+  inputSearch = new FormControl('');
  
 
  
@@ -61,7 +63,26 @@ export class TablesComponent implements OnInit{
   
   
   constructor(private membersService: MembersService) { 
-    
+    this.inputSearch.valueChanges
+    .pipe(//un tunel antes de hacer el suscribe y buscar en l servicio
+
+      //operadores de rexjs
+      map((search:string) => search.trim() ), //elimino los espacios
+      debounceTime(350),//retrasa la busqueda un tiempo
+      distinctUntilChanged(),//valor distinto al anterior
+      filter((search:string)=>search !=='')//para que el termino no sea vacio
+    )
+    .subscribe((res: string) => {
+      this.membersService.search(res).subscribe ((response: any) => {
+
+        console.log(response);
+        this.members = response.data;
+        //this.updateBookings(this.members);
+       
+  
+  
+      });
+    });
   }
 
   ngOnInit(): void {

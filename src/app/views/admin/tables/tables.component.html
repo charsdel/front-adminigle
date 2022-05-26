@@ -6,30 +6,40 @@
 
     <div *ngIf="!selectedMember" class="w-full mb-12 px-4">
 
-        <div class="flex flex-row mb-6 ">
-          <div class="basis-3/4">
-            <input type="text" #searchTerm (keyup)="search(searchTerm.value)" placeholder="Buscar Miembros..." class=" block text-gray-700 text-sm font-bold	"/>
-          </div>
-          
-          <div class="basis-1/4 self-end">
-            <a [routerLink]="['/admin/nuevo-miembro']"
-            class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Agregar +</a>
+
+      <div class="grid justify-items-end ...">
+        <div class="mb-6 pr-10">
+          <a [routerLink]="['/admin/nuevo-miembro']"
+          class=" h-10 w-32 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 uppercase rounded">Agregar +</a>
+  
+        </div>
+       
+      </div>
+
+      
+      
+
+      <div class="bg-white border-t border-l border-r rounded-5 ">
+
+          <div class="flex input-group relative flex flex-wrap items-stretch w-full mb-4 pt-4 px-2">
+            <input type="search" [formControl]="inputSearch" class=" form-control inline-block min-w-0 w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Buscar" aria-label="Search" aria-describedby="button-addon2">
+            
 
           </div>
-        </div>
-          
-      
+
+      </div>
+
 
         <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
         >
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
-            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-center ">
               <h3
-                class="font-semibold text-lg"
+                class="font-semibold text-lg text-zinc-400"
               >
-                Card Tables
+                Miembros de la iglesia
               </h3>
             </div>
           </div>
@@ -143,7 +153,15 @@
                   </tr>
             </tbody>
           </table>
-          <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+
+          <div class="grid justify-items-center">
+            <br><br>
+            <div>
+              <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+
+            </div>
+           
+          </div>
 
 
         </div>
@@ -153,20 +171,20 @@
 
     </div>
 
-  </div>
+</div>
 
-  <div *ngIf="selectedMember">
+<div *ngIf="selectedMember">
 
-    
-    <div class="flex flex-wrap ">
-      
-      <div class="w-full lg:w-12/12 px-4 ">
-        <app-card-profile [member] = "selectedMember"
-      ></app-card-profile>
-      </div>
-     
-      
-    </div>
   
+  <div class="flex flex-wrap ">
+    
+    <div class="w-full lg:w-12/12 px-4 ">
+      <app-card-profile [member] = "selectedMember"
+    ></app-card-profile>
+    </div>
+    
+    
   </div>
+
+</div>
 
