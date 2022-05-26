@@ -1,0 +1,808 @@
+
+<div
+class=" relative bg-slate-100 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg  border-0"
+>
+
+<div class="rounded-t  flex px-4 lg:px-10 py-10 pt-0">
+  <form  (ngSubmit)="onRegister()" #myForm="ngForm" (keydown)="EnterSubmit($event)">
+
+
+
+    <div class="grid grid-cols-1 gap-1 place-content-end  ...">
+      <br>
+      <div class="place-self-end ...">
+
+        <button
+          class="bg-green-600 text-white  font-bold uppercase text-xs  py-2 rounded mr-2  px-6 mb-2 " (click)="fToggleEdit()"
+          type="button"
+          >
+          Editar
+        </button>
+        <button
+          class="bg-blue-600 text-white  font-bold uppercase text-xs py-2 rounded px-4  "
+          type="submit"
+        >
+          guardar
+        </button>
+      </div>
+      
+    </div>
+
+    
+
+    <div class="flex justify-between  mb-0  py-6">
+      <div class="text-center">
+        <div>
+          <input
+            id="name"
+            name="name"
+            #name
+
+            type="text"
+            [(ngModel)]="member.name"
+            [disabled]="inputNameDisabled"
+            [ngClass]="
+          
+            inputNameDisabled
+              ? 'border-b-1 py-0 text-xl font-bold  text-blueGray-700 	 w-10/12	'
+              : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-10/12 ease-linear transition-all duration-150'
+            "
+
+         
+          />
+          <i  *ngIf="toogleEdit" (click)="toggleInput('name')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+        </div>
+
+        <div>
+          <input
+            id="profession"
+            name="profession"
+            #profession
+            type="text"
+            [(ngModel)]="member.profession"
+            [disabled]="inputProfessionDisabled"
+
+            [ngClass]="
+          
+            inputProfessionDisabled
+              ? 'border-b-1 py-0 text-xl  text-blueGray-500 	 w-10/12	'
+              : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-10/12 '
+            "
+
+         
+          />
+          
+          <i *ngIf="toogleEdit"  (click)="toggleInput('profession')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+        </div>
+
+        
+      </div>
+
+     
+
+
+    </div>
+    
+    <div class="flex flex-wrap ">
+      <div class="w-full lg:w-12/12  pb-10">
+
+        <div class="flex flex-wrap">
+
+          <div class="mr-10">
+            
+            <div style="text-align:center">
+              <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+              <div><img [src]="url" *ngIf="url" class=" h-40 w-25 rounded-full" ></div>
+              <p *ngIf="toogleEdit">
+                <input type="file" (change)="showPreview($event)">
+              </p>
+            </div>
+            <div class=" text-center my-4">
+
+              <select 
+                  id="memberStatus"
+                  name="menberStatus"
+                  type="text"
+                  [(ngModel)]="member.status"
+                  [disabled]="inputMemberStatusDisabled"
+                  [ngClass]="
+                
+                  inputMemberStatusDisabled
+                    ? 'border-b-1 px-4 py-0 text-blueGray-600 w-10/12	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-10/12 ease-linear transition-all duration-150'
+                  ">
+                
+                  <option>Activo</option>
+                  <option>Inactivo</option>
+                  <option>N. Creyente</option>
+                  <option>Visitante</option>
+                  
+                </select>
+                <i *ngIf="toogleEdit"  (click)="toggleInput('menberStatus')"
+                    class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+                  ></i>
+            </div>
+          </div>
+          <div class=" flex-auto text-center mt-4">
+
+            <div class="flex">
+              <div class="flex w-20 ...">
+
+                <label class=" text-blueGray-600 font-bold mb-2">Cedula:</label>
+              
+              </div>
+              <div class="flex-auto w-64 ...">
+
+                <input
+                  id="nationalId"
+                  name="nationalId"
+                  #nationalId
+                  type="text"
+                  [(ngModel)]="member.nationalId"
+                  [disabled]="inputnationalIdDisabled"
+                  [ngClass]="
+                
+                  inputnationalIdDisabled
+                    ? ' bg-slate-100 px-4 py-0 text-blueGray-600  w-full	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-full ease-linear transition-all duration-150'
+                  "
+
+              
+                />
+              </div>
+              <div class="flex-auto w-32 ...">
+
+                <i *ngIf="toogleEdit"  (click)="toggleInput('nationalId')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500 "
+                ></i>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex w-20 ...">
+
+                <label class=" text-blueGray-600 font-bold mb-2">Direccion:</label>
+              
+              </div>
+              <div class="flex-auto w-64 ...">
+
+                <input
+                  id="adress"
+                  name="adress"
+                  #adress
+                  type="text"
+                  [(ngModel)]="member.adress"
+                  [disabled]="inputAdressDisabled"
+                  [ngClass]="
+                
+                  inputAdressDisabled
+                    ? ' bg-slate-100 px-4 py-0 text-blueGray-600  w-full	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-full ease-linear transition-all duration-150'
+                  "
+
+              
+                />
+              </div>
+              <div class="flex-auto w-32 ...">
+
+                <i *ngIf="toogleEdit"  (click)="toggleInput('adress')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500 "
+                ></i>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex w-20 ...">
+                <label class=" text-blueGray-600 font-bold mb-2">Correo:</label>
+              </div>
+              <div class="flex-auto w-64 ...">
+  
+                <input
+                  id="mail"
+                  name="mail"
+                  #mail
+                  type="email"
+                  [(ngModel)]="member.mail"
+                  [disabled]="inputMailDisabled"
+                  [ngClass]="
+              
+                  inputMailDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-full	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-full ease-linear transition-all duration-150'
+                  "
+                />
+              </div>
+              <div class="flex-auto w-32 ..."> 
+                <i *ngIf="toogleEdit" (click)="toggleInput('mail')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500 "
+                ></i>
+              </div>  
+            </div>
+
+            <div class="flex">
+              <div class="flex w-20">
+                <label class=" text-blueGray-600 font-bold mb-2">Telefono:</label>
+              </div>
+              <div class="flex-auto w-64 ...">
+
+                <input
+                  id="phone"
+                  name="phone"
+                  #phone
+                  type="text"
+                  [(ngModel)]="member.phoneNumber"
+                  [disabled]="inputPhoneDisabled"
+                  [ngClass]="
+                
+                  inputPhoneDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-full	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-full ease-linear transition-all duration-150'
+                  "
+                />
+              </div>
+              <div class="flex-auto w-32">
+                <i *ngIf="toogleEdit"  (click)="toggleInput('phone')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+                ></i>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex w-20">
+                <label class=" text-blueGray-600 font-bold mb-2">Edad:</label>
+              </div>
+              <div class="flex-auto w-64 ...">
+  
+                <input
+                  id="age"
+                  name="age"
+                  #age
+                  type="number"
+                  [(ngModel)]="member.age"
+                  [disabled]="inputAgeDisabled"
+                  [ngClass]="
+                
+                  inputAgeDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-8/12	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-8/12 ease-linear transition-all duration-150'
+                  "
+                />
+              </div>
+              <div class="flex-auto w-32">
+                <i *ngIf="toogleEdit"  (click)="toggleInput('age')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+                ></i>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex w-21">
+                <label class=" text-blueGray-600 font-bold mb-2">Nacionalidad:</label>
+              </div> 
+              
+              <div class="flex-auto w-64 ...">
+
+                <input
+                  id="nationality"
+                  name="nationality"
+                  #nationality
+                  type="text"
+                  [(ngModel)]="member.nationality"
+                  [disabled]="inputNationalityDisabled"
+                  [ngClass]="
+                
+                  inputNationalityDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-7/12	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-7/12 ease-linear transition-all duration-150'
+                  "
+                />
+              </div>
+              <div class="flex-auto w-32"> 
+                <i *ngIf="toogleEdit" (click)="toggleInput('nationality')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+                ></i>
+              </div> 
+            </div>
+
+            <div class="flex">
+
+              <div class="flex w-20">
+                <label class=" text-blueGray-600 font-bold mb-2">Edo. civil:</label>
+              </div>
+              <div class="flex-auto w-64 ...">
+
+                <select 
+                  id="civilStatus"
+                  name="civilStatus"
+                  type="text"
+                  [(ngModel)]="member.civilStatus"
+                  [disabled]="inputCivilsDisabled"
+                  [ngClass]="
+                
+                  inputCivilsDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-7/12	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-7/12 ease-linear transition-all duration-150'
+                  ">
+                
+                  <option>soltero(a)</option>
+                  <option>casado(a)</option>
+                  <option>viudo(a)</option>
+                  <option>concubinato</option>
+                  
+                </select>
+              </div>
+              
+              <div class="flex-auto w-32">
+                <i *ngIf="toogleEdit" (click)="toggleInput('civilStatus')"
+                  class="fas fa-pen-to-square mr-2 text-sm px-1 text-gray-500 text-right"
+                ></i>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex w-20">
+                <label class=" text-blueGray-600 font-bold mb-2">sexo:</label>
+              </div>
+              <div class="flex-auto w-64 ...">
+                <select 
+                id="gender"
+                  name="gender"
+                  type="text"
+                  [(ngModel)]="member.gender"
+                  [disabled]="inputGenderDisabled"
+                  [ngClass]="
+                
+                  inputGenderDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-8/12	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-8/12 ease-linear transition-all duration-150'
+                  ">
+                
+                  <option>masculino</option>
+                  <option>femenino</option>
+                  
+                </select>
+              </div>
+
+              <div class="flex-auto w-32">
+                <i *ngIf="toogleEdit" (click)="toggleInput('gender')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500  text-righ"
+                ></i>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex w-20">
+                <label class=" text-blueGray-600 font-bold mb-2">F. Nac.:</label>
+              </div>
+              <div class="flex-auto w-64 ...">
+                <input
+                  id="born"
+                  name="born"
+                  type="date"
+                  [(ngModel)]="member.born"
+                  [disabled]="inputBornDisabled"
+                  [ngClass]="
+                
+                  inputBornDisabled
+                    ? 'bg-slate-100 px-4 py-0 text-blueGray-600  w-6/12	'
+                    : 'bg-green-500 shadow border-0 px-3 py-0 text-white  w-6/12 ease-linear transition-all duration-150'
+                  "
+                />
+              </div>
+              <div class="flex-auto w-32">
+                <i *ngIf="toogleEdit" (click)="toggleInput('born')"
+                  class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+                ></i>
+              </div>
+            </div>
+
+          </div>
+         
+        </div>
+          
+      </div>
+      
+
+      <div class="w-full lg:w-6/12 px-4 mt-4">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password"> Sede</label>
+          <select
+            id="sede"
+            name="sede"
+            type="text"
+            [disabled]="inputSedeDisabled"
+            [(ngModel)]="member.sedeName"
+
+            [ngClass]="
+          
+            inputSedeDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-10/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-10/12'
+            "
+          >
+            <option *ngFor="let opt of sedes"
+              [selected]="opt.sede_id === member.sedeId"
+              [value]="opt.nombre">{{opt.nombre}}>
+              hghghg
+            </option>
+          
+          </select>
+          <i *ngIf="toogleEdit" (click)="toggleInput('sede')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+        
+      
+      </div>
+      
+      <div class="w-full lg:w-6/12 px-4">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Red</label>
+          <input
+            id="netName"
+            name="netName"
+            type="text"
+            [(ngModel)]="member.netName"
+            [disabled]="inputNetDisabled"
+            [ngClass]="
+          
+            inputNetDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-10/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-10/12'
+            "
+          />
+          <i *ngIf="toogleEdit" (click)="toggleInput('net')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+
+      </div>
+
+      <div class="w-full lg:w-6/12 px-4">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Hogar</label>
+          <input
+            id="homeName"
+            name="homeName"
+            type="text"
+            [(ngModel)]="member.homeName"
+            [disabled]="inputHomeDisabled"
+            [ngClass]="
+          
+            inputHomeDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-10/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-10/12'
+            "
+          />
+          <i *ngIf="toogleEdit" (click)="toggleInput('home')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+
+      </div>
+
+      <div class="w-full lg:w-6/12 px-4">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Ocupacion</label>
+          <select 
+            id="occupation"
+            name="occupation"
+            type="text"
+            [(ngModel)]="member.occupation"
+            [disabled]="inputOccupationDisabled"
+            [ngClass]="
+          
+            inputOccupationDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-10/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-10/12'
+            "
+          >
+              <option>ANCIANO</option>
+              <option>ANFITRIÓN</option>
+              <option>ASISTENTE</option>
+              <option>COPASTOR</option>
+              <option>DISCIPULO</option>
+              <option>LIDER</option>
+              <option>NUEVO</option>
+              <option>PASTOR</option>
+              <option>SERVIDOR</option>
+              <option>VISITANTE</option>
+              <option>OTROS</option>
+
+             
+          </select>
+          <i *ngIf="toogleEdit" (click)="toggleInput('occupation')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+
+        
+      </div>
+    </div>
+
+    <hr class="mt-6 " />
+    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+      informacion Eclesiastica
+    </h6>
+    <hr class="mt-6 border-b-1 border-blueGray-300 pb-10" />
+
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-6/12">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">F. Nacimiento Espiritual</label>
+      
+
+
+          <input 
+            id="spiritualBirthDate"
+            placeholder="Select date"
+            name="spiritualBirthDate"
+            type="date"
+            value="2018-07-22"
+            min="1940-01-01"
+            max="2030-12-31"
+            [(ngModel)]="member.spiritualBirthDate"
+            [disabled]="inputSpiritualBdDisabled"
+            [ngClass]="
+            
+            inputSpiritualBdDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-10/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-10/12'    
+            "
+          />
+          <i *ngIf="toogleEdit" (click)="toggleInput('spiritualBD')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+      </div>
+
+      
+
+      <div class="w-full lg:w-6/12">
+
+        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Primera Iglesia</label>
+        <input
+          id="churchBorn"
+          name="churchBorn"
+          #churchBorn
+          type="text"
+          [(ngModel)]="member.churchBorn"
+          [disabled]="inputchurchBornDisabled"
+          [ngClass]="
+        
+          inputchurchBornDisabled
+            ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-10/12'
+            : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-10/12'
+          "
+        />
+        <i *ngIf="toogleEdit" (click)="toggleInput('churchBorn')"
+          class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+        ></i>
+    </div>
+    </div>
+    <div class="flex flex-wrap mt-4">
+
+      <div class="w-full lg:w-4/12">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Es bautizado ?</label>
+          <select
+            id="baptized"
+            name="baptized"
+            type="text"
+            [(ngModel)]="member.baptized"
+            [disabled]="inputBaptizedDisabled"
+            [ngClass]="
+          
+            inputBaptizedDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-9/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-9/12'
+            "
+          >
+            <option>Si</option>
+            <option>No</option>
+
+          </select>
+          <i *ngIf="toogleEdit" (click)="toggleInput('baptized')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+      </div>
+
+      <div class="w-full lg:w-4/12">
+
+
+
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Bautizmo</label>
+          <input
+            id="christeningDate"
+            name="christeningDate"
+            type="date"
+            value=""
+            min="1940-01-01"
+            max="2030-12-31"
+            [(ngModel)]="member.christeningDate"
+            [disabled]="inputchristeningDateDisabled"
+            [ngClass]="
+          
+            inputchristeningDateDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-9/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-9/12'
+            "
+          />
+          <i *ngIf="toogleEdit" (click)="toggleInput('christeningDate')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+      </div>
+
+      <div class="w-full lg:w-4/12">
+
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Iglesia de Bautiso</label>
+          <input
+            id="churchWaterChristening"
+            name="churchWaterChristening"
+            #churchWaterChristening
+            type="text"
+            [(ngModel)]="member.churchWaterChristening"
+
+            [disabled]="inputchurchWcDisabled"
+            [ngClass]="
+          
+            inputchurchWcDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-9/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-9/12'
+            "
+          />
+          <i *ngIf="toogleEdit" (click)="toggleInput('churchWaterChristening')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+
+        
+      </div>
+    </div>
+
+    <div class="flex flex-wrap ">
+      
+      <div class="w-full lg:w-12/12 mt-4">
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">areas de servicio en el PASADO</label>
+          <textarea
+            id="pastServiceArea"
+            name="pastServiceArea"
+            #pastServiceArea
+            type="text"
+            [(ngModel)]="member.pastServiceArea"
+
+            [disabled]="inputPastServicesDisabled"
+            [ngClass]="
+          
+            inputPastServicesDisabled
+              ? 'border-slate-200 shadow bg-white px-2 py-2 text-sm text-blueGray-600 w-11/12'
+              : 'bg-green-500 shadow px-2 py-2 text-white text-xl rounded w-11/12'
+            "
+          >
+
+          </textarea>
+          <i *ngIf="toogleEdit"  (click)="toggleInput('pastServices')"
+            class=" px-2 fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+        
+      </div>
+
+      <div class="w-full lg:w-12/12 mt-4">
+
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">areas de servicio en el PRESENTE</label>
+          
+          <textarea
+            id="currentServiceArea"
+            name="currentServiceArea"
+            #currentServiceArea
+            type="text"
+            [(ngModel)]="member.currentServiceArea"
+
+            [disabled]="inputCurrentServiceAreaDisabled"
+            [ngClass]="
+          
+            inputCurrentServiceAreaDisabled
+              ? 'border-slate-200 shadow bg-white px-2 py-2 text-sm text-blueGray-600 w-11/12'
+              : 'bg-green-500 shadow px-2 py-2 text-white text-xl rounded w-11/12'
+            "
+          >
+
+          </textarea>
+          <i *ngIf="toogleEdit"  (click)="toggleInput('CurrentServiceArea')"
+            class=" px-2 fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+        
+
+      </div>
+
+      
+ 
+    </div>
+
+    <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+      Estudios
+    </h6>
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-4/12 px-4">
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Discipulado Aprobado ?</label>
+          
+          
+          <select
+            id="approvedDiscipleship"
+            name="approvedDiscipleship"
+            type="number"
+            [(ngModel)]="member.approvedDiscipleship"
+            [disabled]="inputapprovedDiscipleshipDisabled"
+            [ngClass]="
+          
+            inputapprovedDiscipleshipDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-9/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-9/12'
+            "
+          > 
+              <option>Si</option>
+              <option>No</option>
+              
+             
+          </select>
+
+
+
+
+          <i *ngIf="toogleEdit"  (click)="toggleInput('approvedDiscipleship')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+        
+      </div>
+
+      <div class="w-full lg:w-4/12 px-4">
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Aprobacion</label>
+          <input
+            id="dicipulateApprovalDate"
+            name="dicipulateApprovalDate"
+            type="date"
+            value=""
+            min="1940-01-01"
+            max="2030-12-31"
+            [(ngModel)]="member.dicipulateApprovalDate"
+            [disabled]="inputdicipulateApprovalDateDisabled"
+            [ngClass]="
+          
+            inputdicipulateApprovalDateDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-9/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-9/12'
+            "
+          />
+          <i *ngIf="toogleEdit" (click)="toggleInput('dicipulateApprovalDate')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+      </div>
+
+      <div class="w-full lg:w-4/12 px-4">
+          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Maestro</label>
+          <input
+            id="discipleshipTeacher"
+            name="discipleshipTeacher"
+            #discipleshipTeacher
+            type="text"
+            [(ngModel)]="member.discipleshipTeacher"
+            [disabled]="inputdiscipleshipTeacherDisabled"
+            [ngClass]="
+          
+            inputdiscipleshipTeacherDisabled
+              ? 'border-slate-200 shadow bg-white px-4 py-3 text-sm text-blueGray-600 w-9/12'
+              : 'bg-green-500 shadow px-3 py-3 text-white text-xl rounded w-9/12'
+            "
+          />
+          <i *ngIf="toogleEdit"  (click)="toggleInput('discipleshipTeacher')"
+            class="fas fa-pen-to-square mr-2 text-sm pl-1 text-gray-500"
+          ></i>
+      
+      </div>
+
+    </div>
+  </form>
+</div>
+</div>

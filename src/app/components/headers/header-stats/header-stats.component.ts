@@ -19,9 +19,9 @@ export class HeaderStatsComponent implements OnInit {
     this.membersService.getMemberStatistics().subscribe
     ((response: any) => {
 
-      console.log(response);
+      //console.log(response);
       this.headerValue = response;
-      console.log(this.headerValue.miembros);
+      //console.log(this.headerValue.miembros);
 
     
 
