@@ -19,6 +19,8 @@ export class AuthService {
   private apiUrlRegister = 'http://admini/api/register';
   private apiUrlLogin =  'http://admini/api/login';
 
+  private apiUrlLoginWp =  'http://wordpress/wp-json/jwt-auth/v1/token';
+
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +36,25 @@ export class AuthService {
   signin(user: User): Observable<any> {
     return this.http.post<any>(this.apiUrlLogin, user);
   }
+
+
+  //registro y login en el api de laravel 
+  // User registration
+  registerWp(user: User): Observable<any> {
+    return this.http.post(this.apiUrlRegister, user);
+  }
+  // Login
+  signinWp(user: User): Observable<any> {
+    //console.log(user.username)
+    return this.http.post<any>(this.apiUrlLoginWp,
+    {
+      username:"charsdel",
+      password:"Cinder.91"
+    }
+    
+  );
+  }
+
 
 
   //registro y login en el api de worpress  

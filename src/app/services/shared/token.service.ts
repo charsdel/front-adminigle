@@ -17,6 +17,19 @@ export class TokenService {
     return localStorage.getItem('auth_token');
   }
 
+  //para almacenar el token de Word press local storage
+
+  handleDataWp(token: any) {
+    localStorage.setItem('auth_token_wp', token);
+  }
+
+  
+  getTokenWp() {
+    return localStorage.getItem('auth_token_wp');
+  }
+
+ 
+
   // Verify the token
   isValidToken() {
     const token = this.getToken();
@@ -50,5 +63,9 @@ export class TokenService {
   // Remove token
   removeToken() {
     localStorage.removeItem('auth_token');
+  }
+
+  removeTokenWp() {
+    localStorage.removeItem('auth_token_wp');
   }
 }

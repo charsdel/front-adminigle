@@ -28,21 +28,46 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {}
   onSubmit() {
+    
+    //login con worpress lo hace y devuelve token ,pero no la consulta 
+    //NOTA: REVISAR LUEGO
+    /*
+    this.authService.signinWp(this.loginForm.value).subscribe(
+     
+      (response: any) => {
+        console.log(response.token)
+        //this.authState.setAuthState(true);
+        
+        this.responseHandlerWp(response.token);
+      
+      }
+    );*/
+
+
+      
     this.authService.signin(this.loginForm.value).subscribe(
      
       (response: any) => {
-        console.log(response.data)
+        //console.log(response.data)
         this.authState.setAuthState(true);
         
         this.responseHandler(response.data);
-        this.router.navigate(['admin']);
+        //this.router.navigate(['admin']);
       
       }
     );
+
+    this.router.navigate(['admin']);
+
   }
   // Handle response
   responseHandler(data:any) {
+    console.log(data.token);
     this.token.handleData(data.token);
+  }
+
+  responseHandlerWp(data:any) {
+    this.token.handleData(data);
   }
 
 }
