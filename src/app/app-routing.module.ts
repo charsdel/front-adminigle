@@ -27,6 +27,10 @@ import { IndexComponent } from "./views/index/index.component";
 import { LoginComponent } from "./views/auth/login/login.component";
 import { RegisterComponent } from "./views/auth/register/register.component";
 
+//noticias 
+
+import { NewsComponent } from './views/news/news.component';
+
 
 //authguard para redireccionar si no esta logueado 
 
@@ -43,6 +47,7 @@ const routes: Routes = [
         { path: "miembros", component: TablesComponent,canActivate: [AuthGuard]},
         { path: "profiles", component: ProfilesComponent,canActivate: [AuthGuard] },
         { path: "nuevo-miembro", component: ProfileSaveComponent,canActivate: [AuthGuard] },
+        { path: "news", component: NewsComponent, canActivate: [AuthGuard]},
 
         { path: "", component: IndexComponent}
 
@@ -61,9 +66,8 @@ const routes: Routes = [
         { path: "register", component: RegisterComponent },
        
       ],
-    },
+    }
 
-    //{ path: "", component: IndexComponent }
 
 ];
 

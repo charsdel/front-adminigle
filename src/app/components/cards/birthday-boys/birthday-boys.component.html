@@ -1,0 +1,109 @@
+
+<div class="block w-full overflow-x-auto px-6">   
+  <h3 class="text-3xl font-semibold mt-10 text-center uppercase ">Cumpleañeros <i 
+    class="fas fa-birthday-cake mr-2 text-6xl pl-1 text-gray-500"
+    ></i></h3><br>
+
+
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+            
+        >
+          cedula
+        </th>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+        
+        >
+        nombre
+          </th>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+          
+        >
+        F. Nacimiento
+
+        </th>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+          
+        >
+        telefono
+
+        </th>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+          
+          
+        >
+        correo
+        </th>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+          
+          
+        >
+        ocupacion
+        </th>
+        <th
+          class="px-4  border border-solid py-3  uppercase border-l-0 border-r-0  font-semibold text-left"
+          
+          
+        >
+        
+        </th>
+      
+      </tr>
+    </thead>
+    <tbody>
+        
+
+      <tr *ngFor="let member of members">
+        <td
+          class="border-t-0 px-4 border-l-0 border-r-0   p-4"
+        >
+        {{member.cedula}}
+
+        </td>
+        <td
+          class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+        >
+        {{member.nombres}}
+
+      </td>
+        <td
+          class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+        >
+        {{member.fecha_nac}}
+        </td>
+        <td
+          class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+        >
+        {{member.telefono}}
+
+
+        </td>
+        <td
+          class="border-t-0 px-4  border-l-0 border-r-0   p-4"
+        >
+        {{member.correo}}
+
+
+        </td>
+        <td
+          class="border-t-0 px-4  border-l-0 border-r-0   p-4 "
+        >
+        {{member.ocupacion}}
+
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>     
+
+  
+   

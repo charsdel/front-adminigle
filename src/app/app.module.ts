@@ -39,6 +39,8 @@ import { CardPsocialComponent } from './components/cards/card-psocial/card-psoci
 import { AdminNavbarComponent } from './components/navbars/admin-navbar/admin-navbar.component';
 import { HeaderStatsComponent } from './components/headers/header-stats/header-stats.component';
 import { CardStatsComponent } from './components/cards/card-stats/card-stats/card-stats.component';
+import { BirthdayBoysComponent } from './components/cards/birthday-boys/birthday-boys.component';
+
 import { IndexComponent } from './views/index/index.component';
 import { FooterComponent } from './components/footers/footer/footer.component';
 import { LoginComponent } from './views/auth/login/login.component';
@@ -46,6 +48,7 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { AuthNavbarComponent } from './components/navbars/auth-navbar/auth-navbar.component';
 import { ProfileSaveComponent } from './views/admin/profile-save/profile-save.component';
+import { NewsComponent } from './views/news/news.component';
 
 
 
@@ -74,6 +77,8 @@ import { ProfileSaveComponent } from './views/admin/profile-save/profile-save.co
     AuthComponent,
     AuthNavbarComponent,
     ProfileSaveComponent,
+    BirthdayBoysComponent,
+    NewsComponent
     
 
     

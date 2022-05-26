@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 
 import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/member.model';
+
+//para reactividad que comunica a componentes entre si
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -14,6 +16,8 @@ export class MembersService {
   private apiUrl = 'http://admini/api/v1/members';
   private apiSeachUrl = 'http://admini/api/v1/members/search/';
   private apiUrlStatistics = 'http://admini/api/v1/statictis';
+  private apiUrlBirthday = 'http://admini/api/v1/hb';
+
 
   //esta direccion la usare para trar todos los hogares, redes y sedes y evitar llamar a base de datos 
   //tantas veces para cada cosa, la idea es manejar el intercambio de data entre los drops a nivel de codigo
@@ -21,11 +25,10 @@ export class MembersService {
 
   private apiSaveProfileImage = 'http://admini/api/v1/saveimage';
 
-
-
-
   private value='';
 
+  private myStat = new BehaviorSubject <any>([]);
+  myStat$ = this.myStat.asObservable();
  
 
   //private searchTermStream = new Subject<string>();
@@ -143,6 +146,12 @@ export class MembersService {
   getMemberStatistics()
   {
     return this.http.get<any>(this.apiUrlStatistics);
+
+  }
+
+  getBirthdayBoys()
+  {
+    return this.http.get<any>(this.apiUrlBirthday);
 
   }
 
