@@ -5,6 +5,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TokenService } from '../../../services/shared/token.service';
 import { AuthStateService } from '../../../services/shared/auth-state.service'
 
+//para los mensajes de notificaciones 
+import { NotificationService } from '../../../services/notification.service';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +23,8 @@ export class LoginComponent implements OnInit {
     public fb: FormBuilder,
     public authService: AuthService,
     private token: TokenService,
-    private authState: AuthStateService
+    private authState: AuthStateService,
+    private notifyService : NotificationService
   ) {
     this.loginForm = this.fb.group({
       username: [],
@@ -48,21 +53,35 @@ export class LoginComponent implements OnInit {
     this.authService.signin(this.loginForm.value).subscribe(
      
       (response: any) => {
-        //console.log(response.data)
-        this.authState.setAuthState(true);
+        //console.log(response)
+        if(!response.success)
+        {
+          this.notifyService.showError("Error de Login", "IgleAdmin.com")
+
+          //console.log('entro')
+        }else
+        {
+
+          this.notifyService.showSuccess("Login Exitoso", "IgleAdmin.com")
+
+          this.authState.setAuthState(true);
         
-        this.responseHandler(response.data);
-        //this.router.navigate(['admin']);
+          this.responseHandler(response.data);
+          this.router.navigate(['admin']);
+
+        }
+
+       
       
       }
     );
 
-    this.router.navigate(['admin']);
+    //this.router.navigate(['admin']);
 
   }
   // Handle response
   responseHandler(data:any) {
-    console.log(data.token);
+    //console.log(data.token);
     this.token.handleData(data.token);
   }
 
