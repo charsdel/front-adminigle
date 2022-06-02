@@ -13,6 +13,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MembersService {
 
+  //local
+  /*
   private apiUrl = 'http://admini/api/v1/members';
   private apiSeachUrl = 'http://admini/api/v1/members/search/';
   private apiUrlStatistics = 'http://admini/api/v1/statictis';
@@ -23,7 +25,22 @@ export class MembersService {
   //tantas veces para cada cosa, la idea es manejar el intercambio de data entre los drops a nivel de codigo
   private apiUrlschemedrops = 'http://admini/api/v1/schemedrops';
 
-  private apiSaveProfileImage = 'http://admini/api/v1/saveimage';
+  private apiSaveProfileImage = 'http://admini/api/v1/saveimage';*/
+
+
+  //servidor
+
+  private apiUrl = 'https://admini.igleadmin.com/api/v1/members';
+  private apiSeachUrl = 'https://admini.igleadmin.com/api/v1/members/search/';
+  private apiUrlStatistics = 'https://admini.igleadmin.com/api/v1/statictis';
+  private apiUrlBirthday = 'https://admini.igleadmin.com/api/v1/hb';
+
+
+  //esta direccion la usare para trar todos los hogares, redes y sedes y evitar llamar a base de datos 
+  //tantas veces para cada cosa, la idea es manejar el intercambio de data entre los drops a nivel de codigo
+  private apiUrlschemedrops = 'https://admini.igleadmin.com/api/v1/schemedrops';
+
+  private apiSaveProfileImage = 'https://admini.igleadmin.com/api/v1/saveimage';
 
   private value='';
 
@@ -59,6 +76,7 @@ export class MembersService {
 
   getMembersByPage (page: number){
 
+    console.log(this.apiUrl + '?page=' + page)
     return this.http.get<Member[]>(this.apiUrl + '?page=' + page);
     
   }

@@ -12,7 +12,13 @@ export class NewsService {
   news : any  
  
 
-  private apiWpUrl = 'http://wordpress/wp-json/wp/v2/posts';
+  //local
+
+  //private apiWpUrl = 'http://wordpress/wp-json/wp/v2/posts';
+
+  //servidor
+
+  private apiWpUrl = 'https://wp.igleadmin.com/wp-json/wp/v2/posts';
 
 
   constructor(private http: HttpClient) { }

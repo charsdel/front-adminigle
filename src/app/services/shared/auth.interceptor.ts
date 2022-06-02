@@ -26,21 +26,22 @@ export class AuthInterceptor implements HttpInterceptor {
             var re = "admini"; 
             if (url.search(re) == -1 ) { 
                 const accessToken = this.tokenService.getTokenWp();
-                //console.log(accessToken)
                 req = req.clone({
                     setHeaders: {
-                        //Authorization: "Bearer " + accessToken
-                        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93b3JkcHJlc3MiLCJpYXQiOjE2NTMxMDM0MDAsIm5iZiI6MTY1MzEwMzQwMCwiZXhwIjoxNjUzNzA4MjAwLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.nFj7jOENndYA-xm9J5GM6Tw1mZA77sOwI6vYqDpXLZM"
+                        Authorization: "Bearer " + accessToken
+                        //Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93b3JkcHJlc3MiLCJpYXQiOjE2NTMxMDM0MDAsIm5iZiI6MTY1MzEwMzQwMCwiZXhwIjoxNjUzNzA4MjAwLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.nFj7jOENndYA-xm9J5GM6Tw1mZA77sOwI6vYqDpXLZM"
                     }
                 });
 
                 //console.log(req)
 
             } else { 
+
+
                 const accessToken = this.tokenService.getToken();
 
                 console.log("Contains admini" );
-                console.log(accessToken); 
+                //console.log(accessToken); 
  
                 req = req.clone({
                     setHeaders: {
