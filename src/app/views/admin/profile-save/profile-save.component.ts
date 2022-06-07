@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MembersService } from '../../../services/members.service';
 import { Member } from '../../../models/member.model';
 import { NotificationService } from '../../../services/notification.service';
@@ -13,7 +13,7 @@ import { NotificationService } from '../../../services/notification.service';
 export class ProfileSaveComponent implements OnInit {
 
 
-  @Input() member : Member = {
+   member : Member = {
 
     memberId : 1,
     name: '',
