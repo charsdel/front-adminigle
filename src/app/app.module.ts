@@ -49,6 +49,8 @@ import { AuthComponent } from './layouts/auth/auth.component';
 import { AuthNavbarComponent } from './components/navbars/auth-navbar/auth-navbar.component';
 import { ProfileSaveComponent } from './views/admin/profile-save/profile-save.component';
 import { NewsComponent } from './views/news/news.component';
+import { ForgotPassComponent } from './views/auth/forgot-pass/forgot-pass.component';
+import { ResetPassComponent } from './views/auth/reset-pass/reset-pass.component';
 
 
 
@@ -78,7 +80,9 @@ import { NewsComponent } from './views/news/news.component';
     AuthNavbarComponent,
     ProfileSaveComponent,
     BirthdayBoysComponent,
-    NewsComponent
+    NewsComponent,
+    ForgotPassComponent,
+    ResetPassComponent
     
 
     

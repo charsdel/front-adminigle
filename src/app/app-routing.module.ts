@@ -26,6 +26,10 @@ import { IndexComponent } from "./views/index/index.component";
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
 import { RegisterComponent } from "./views/auth/register/register.component";
+import { ForgotPassComponent } from "./views/auth/forgot-pass/forgot-pass.component";
+import { ResetPassComponent } from "./views/auth/reset-pass/reset-pass.component";
+
+
 
 //noticias 
 
@@ -64,6 +68,10 @@ const routes: Routes = [
       children: [
         { path: "login", component: LoginComponent },
         { path: "register", component: RegisterComponent },
+        { path: "forgot-password", component: ForgotPassComponent },
+        { path: "reset-password", component: ResetPassComponent },
+
+
        
       ],
     }

@@ -1,0 +1,98 @@
+<div class="container mx-auto px-4 h-full">
+    <div class="flex content-center items-center justify-center h-full">
+      <div class="w-full lg:w-4/12 px-4">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
+        >
+          <div class="rounded-t mb-0 px-6 py-6">
+            <div class="text-center mb-3">
+              <h1 class="text-blueGray-500 font-bold">Olvidó Contraseña ?</h1>
+            </div>
+            
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+          </div>
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <div class="text-blueGray-400 text-center mb-3 font-bold">
+              <small>introduzca los datos solicitados </small>
+            </div>
+            <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+              <div class="relative w-full mb-3">
+               
+                <input
+
+                    formControlName="email"
+                    class="form-control"
+                    type="email"
+                    id="email"
+                    
+                    class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Correo Registrado"
+                />
+                <div *ngIf="f['email'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error: </strong>
+                    <span class="block sm:inline">Email Requerido!</span>
+                   
+                  </div>
+                <input
+
+                    formControlName="password"
+                    class="form-control"
+                    type="password"
+                    class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Nueva Clave"
+                />
+                <div *ngIf="f['password'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error: </strong>
+                    <span class="block sm:inline">Password Requerido!</span>
+                   
+                </div>
+
+                <div *ngIf="f['password'].getError('minlength')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                  <strong class="font-bold">Error: </strong>
+                  <span class="block sm:inline">Minimo 8 caracteres</span>
+                 
+                </div>
+
+                <input
+
+                    formControlName="password_confirmation"
+                    class="form-control"
+                    type="password"
+                    class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Confirmacion de la Nueva Clave"
+                />
+
+                <div *ngIf="f['password_confirmation'].getError('Mustmatch')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error: </strong>
+                    <span class="block sm:inline">Confirmacion del Password Requerido!</span>
+                   
+                  </div>
+              </div>
+             
+          
+  
+            
+  
+              <div class="text-center mt-6">
+                <button
+                  [disabled]="!resetForm.valid"
+                  type="submit"
+                  [ngClass]="
+                
+                  resetForm.invalid
+                    ? ' bg-gray-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow'
+                    : 'bg-green-600 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow '
+                  "
+
+                >
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
