@@ -7,9 +7,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PasswordService {
 
+
+  /*
   private apiForgotPassword = 'http://admini/api/forgot-password';
   private apiResetPassword = 'http://admini/api/reset-password';
+  */
 
+  private apiForgotPassword = 'https://admini.igleadmin.com/api/forgot-password';
+  private apiResetPassword = 'https://admini.igleadmin.com/api/reset-password';
 
 
   constructor(private http: HttpClient) { }

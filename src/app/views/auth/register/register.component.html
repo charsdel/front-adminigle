@@ -60,9 +60,14 @@
               <input
                 formControlName="username" 
                 type="text"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Nombre de usuario"
               />
+              <div *ngIf="f['username'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Aviso: </strong>
+                <span class="block sm:inline">Username Requerido!</span>
+               
+              </div>
             </div>
 
             <div class="relative w-full mb-3">
@@ -75,9 +80,14 @@
               <input
                 class="form-control" formControlName="email"
                 type="email"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Email"
               />
+              <div *ngIf="f['email'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Aviso: </strong>
+                <span class="block sm:inline">Email Requerido!</span>
+               
+              </div>
             </div>
 
             <div class="relative w-full mb-3">
@@ -85,14 +95,19 @@
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                 htmlFor="grid-password"
               >
-                Name
+                Nombre
               </label>
               <input
                 formControlName="name" 
                 type="email"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Name"
               />
+              <div *ngIf="f['name'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Aviso: </strong>
+                <span class="block sm:inline">Nombre Requerido!</span>
+               
+              </div>
             </div>
 
             <div class="relative w-full mb-3">
@@ -105,9 +120,14 @@
               <input
                 formControlName="password"
                 type="password"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Password"
               />
+              <div *ngIf="f['password'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Aviso: </strong>
+                <span class="block sm:inline">password Requerido!</span>
+               
+              </div>
             </div>
 
             <div class="relative w-full mb-3">
@@ -115,14 +135,24 @@
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                 htmlFor="grid-password"
               >
-              Confirm Password
+              Confirmacion del Password
               </label>
               <input
                 formControlName="password_confirmation"
                 type="password"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="Password"
+                class="border-0 px-3 py-3 mb-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Confirmacion de la Clave"
               />
+              <div *ngIf="f['password_confirmation'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Aviso: </strong>
+                <span class="block sm:inline">Confirmacion Requerida!</span>
+               
+              </div>
+              <div *ngIf="f['password_confirmation'].getError('Mustmatch')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Aviso: </strong>
+                <span class="block sm:inline">Confirmacion debe coincidir!</span>
+               
+              </div>
             </div>
 
             <div>
@@ -141,12 +171,19 @@
               </label>
             </div>
 
+
             <div class="text-center mt-6">
               <button
-                class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                type="submit"
+              [disabled]="!registerForm.valid"
+              type="submit"
+              [ngClass]="
+            
+              registerForm.invalid
+                ? ' bg-gray-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow'
+                : 'bg-green-600 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow '
+              "
               >
-                Create Account
+                Crear Cuenta
               </button>
             </div>
 

@@ -29,7 +29,7 @@
                     placeholder="Correo Registrado"
                 />
                 <div *ngIf="f['email'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Error: </strong>
+                    <strong class="font-bold">Aviso: </strong>
                     <span class="block sm:inline">Email Requerido!</span>
                    
                   </div>
@@ -42,13 +42,13 @@
                     placeholder="Nueva Clave"
                 />
                 <div *ngIf="f['password'].getError('required')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Error: </strong>
+                    <strong class="font-bold">Aviso: </strong>
                     <span class="block sm:inline">Password Requerido!</span>
                    
                 </div>
 
                 <div *ngIf="f['password'].getError('minlength')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                  <strong class="font-bold">Error: </strong>
+                  <strong class="font-bold">Aviso: </strong>
                   <span class="block sm:inline">Minimo 8 caracteres</span>
                  
                 </div>
@@ -63,7 +63,7 @@
                 />
 
                 <div *ngIf="f['password_confirmation'].getError('Mustmatch')"   class="bg-red-100 mb-3 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Error: </strong>
+                    <strong class="font-bold">Aviso: </strong>
                     <span class="block sm:inline">Confirmacion del Password Requerido!</span>
                    
                   </div>

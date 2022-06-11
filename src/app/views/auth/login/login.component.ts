@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/shared/auth.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl,Validators,FormBuilder } from '@angular/forms';
 import { TokenService } from '../../../services/shared/token.service';
 import { AuthStateService } from '../../../services/shared/auth-state.service'
 
@@ -16,7 +16,15 @@ import { NotificationService } from '../../../services/notification.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+
+      
+  });
+
+
   errors:any = null;
   constructor(
     public router: Router,
@@ -26,12 +34,18 @@ export class LoginComponent implements OnInit {
     private authState: AuthStateService,
     private notifyService : NotificationService
   ) {
-    this.loginForm = this.fb.group({
-      username: [],
-      password: [],
-    });
+    
   }
-  ngOnInit() {}
+  ngOnInit() {
+
+
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+
+
+  }
   onSubmit() {
     
     //login con worpress lo hace y devuelve token ,pero no la consulta 
