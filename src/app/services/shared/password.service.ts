@@ -13,6 +13,7 @@ export class PasswordService {
   private apiResetPassword = 'http://admini/api/reset-password';
   */
 
+
   private apiForgotPassword = 'https://admini.igleadmin.com/api/forgot-password';
   private apiResetPassword = 'https://admini.igleadmin.com/api/reset-password';
 
