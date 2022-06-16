@@ -51,6 +51,7 @@ import { ProfileSaveComponent } from './views/admin/profile-save/profile-save.co
 import { NewsComponent } from './views/news/news.component';
 import { ForgotPassComponent } from './views/auth/forgot-pass/forgot-pass.component';
 import { ResetPassComponent } from './views/auth/reset-pass/reset-pass.component';
+import { LandingComponent } from './views/landing/landing.component';
 
 
 
@@ -82,7 +83,8 @@ import { ResetPassComponent } from './views/auth/reset-pass/reset-pass.component
     BirthdayBoysComponent,
     NewsComponent,
     ForgotPassComponent,
-    ResetPassComponent
+    ResetPassComponent,
+    LandingComponent
     
 
     

@@ -10,6 +10,8 @@ import { AuthComponent } from "./layouts/auth/auth.component";
 
 //vistas
 import { TablesComponent } from "./views/admin/tables/tables.component";
+import { LandingComponent } from "./views/landing/landing.component";
+
 
 
 //adminviews
@@ -52,8 +54,9 @@ const routes: Routes = [
         { path: "profiles", component: ProfilesComponent,canActivate: [AuthGuard] },
         { path: "nuevo-miembro", component: ProfileSaveComponent,canActivate: [AuthGuard] },
         { path: "news", component: NewsComponent, canActivate: [AuthGuard]},
+        { path: "", component: IndexComponent,canActivate: [AuthGuard] }
 
-        { path: "", component: IndexComponent}
+        
 
 
       ],
@@ -74,7 +77,8 @@ const routes: Routes = [
 
        
       ],
-    }
+    },
+    { path: "", component: LandingComponent}
 
 
 ];
