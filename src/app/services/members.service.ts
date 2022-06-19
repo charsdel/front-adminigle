@@ -4,14 +4,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Member } from '../models/member.model';
 
-//para reactividad que comunica a componentes entre si
-import { BehaviorSubject } from 'rxjs';
+//las use para hacer el refrescar de la pagina
+import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService {
+
+
+  private _refresh$ = new Subject<void>()
 
   //local
   /*
@@ -44,8 +48,7 @@ export class MembersService {
 
   private value='';
 
-  private myStat = new BehaviorSubject <any>([]);
-  myStat$ = this.myStat.asObservable();
+ 
  
 
   //private searchTermStream = new Subject<string>();
@@ -68,6 +71,11 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
 
+  //obtener el subject del observable en el pipe
+  get refresh$()
+  {
+    return this._refresh$;
+  }
 
   getAllMembers(){
     return this.http.get<Member[]>(this.apiUrl);
@@ -81,17 +89,22 @@ export class MembersService {
     
   }
 
-  updateMemberInfo (member: Member,image : string){
+  updateMemberInfo (member: any,image : string){
     if(confirm("Estas seguro de Actualizar este USUARIO")) {
 
-      
-      const body = { cedula:member.nationalId,nombres: member.name,profesion: member.profession, status: member.status,
-        direccion: member.adress,correo: member.mail,foto: image, telefono: member.phoneNumber,
+
+
+      //console.log(member)
+     
+
+        
+      const body = { cedula:member.nationalId,nombres: member.firstName,profesion: member.profession, status: member.memberStatus,
+        direccion: member.adress,correo: member.mail,foto: image, telefono: member.phone,
         edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
         fecha_nac: member.born, sede_id: member.sedeId,red_id: member.netId,home_id: member.homeId, ocupacion: member.occupation,
         fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
         fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
-        fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
+        fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.studies,
         area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea,discipulado_aprobado: member.approvedDiscipleship  };
 
 
@@ -104,7 +117,7 @@ export class MembersService {
           } 
         );
         return(this.value)
-
+    
         
     }
 
@@ -114,22 +127,25 @@ export class MembersService {
   }
 
 
-  saveMemberInfo (member: Member){
+  saveMemberInfo (member: any, image: string){
     if(confirm("Estas seguro de Actualizar este USUARIO")) {
 
-      
-      const body = { cedula: member.nationalId,nombres: member.name,profesion: member.profession, status: member.status,
-        direccion: member.adress,correo: member.mail,foto: member.pictureProfile, telefono: member.phoneNumber,
+
+      //console.log(member.studies)
+
+      //puedo convertir un array object a string
+      const stringStudies = JSON.stringify(member.studies);
+
+
+      //console.log(stringStudies)
+      const body = { cedula: member.nationalId,nombres: member.firstName,profesion: member.profession, status: member.memberStatus,
+        direccion: member.adress,correo: member.mail,foto: image, telefono: member.phone,
         edad: member.age, nacionalidad: member.nationality, estado_civil:member.civilStatus, sexo: member.gender,
         fecha_nac: member.born, sede_id: member.sedeId, red_id: member.netId, home_id: member.homeId, ocupacion: member.occupation,
         fecha_nac_esp: member.spiritualBirthDate, iglesia_creyo: member.churchBorn, bautizado	: member.baptized,
         fecha_bautizo: member.christeningDate, iglesia_bautizo_agua: member.churchWaterChristening,
-        fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: member.discipleshipTeacher,
+        fecha_aprob_discipulado: member.dicipulateApprovalDate, responsable_discipulado: stringStudies,
         area_servicio_pasado: member.pastServiceArea, area_servicio_actual: member.currentServiceArea,discipulado_aprobado: member.approvedDiscipleship  };
-      
-
-
-
       
     //console.log(body);
 
@@ -149,9 +165,14 @@ export class MembersService {
   deleteMember (member: Member){
 
     
-    return this.http.delete<any>(this.apiUrl + '/' +member.memberId).subscribe(
+    return this.http.delete<any>(this.apiUrl + '/' +member.memberId)
+    .pipe(//con este pipe ejecuto un observable luego de borrar
+      tap(()=>
+      this._refresh$.next())
+    )
+    .subscribe(
       data => this.value = data
-    );    
+    )
   }
 
   search (term: String){

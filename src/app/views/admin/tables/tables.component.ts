@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Member } from '../../../models/member.model';
 
 import { MembersService } from '../../../services/members.service';
-import { debounce, debounceTime, distinctUntilChanged, filter, map, Subject, tap } from "rxjs";
+import { debounce, debounceTime, distinctUntilChanged, filter, map, Subject, Subscription, tap } from "rxjs";
 import { FormControl } from '@angular/forms';
 
 
@@ -15,10 +15,10 @@ import { FormControl } from '@angular/forms';
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss']
 })
-export class TablesComponent implements OnInit{
+export class TablesComponent implements OnInit, OnDestroy{
 
 
-
+  suscription!: Subscription;
   
   page :number = 1;
   total: number = 0;
@@ -75,7 +75,7 @@ export class TablesComponent implements OnInit{
     .subscribe((res: string) => {
       this.membersService.search(res).subscribe ((response: any) => {
 
-        console.log(response);
+        //console.log(response);
         this.members = response.data;
         //this.updateBookings(this.members);
        
@@ -84,18 +84,28 @@ export class TablesComponent implements OnInit{
       });
     });
   }
+  ngOnDestroy(): void {
+    this.suscription.unsubscribe();
+  }
 
   ngOnInit(): void {
 
     
     this.getMembersPage ();
+
+    this.suscription = this.membersService.refresh$.subscribe(()=>{
+
+      this.getMembersPage();
+    }
+    
+    )
   
 
     this.searchTermStream
       .subscribe((term: string) => {
         this.membersService.search(term).subscribe ((response: any) => {
 
-          console.log(response);
+          //console.log(response);
           this.members = response.data;
           //this.updateBookings(this.members);
          
@@ -103,6 +113,8 @@ export class TablesComponent implements OnInit{
     
         });
       });
+
+
     
   }
 
