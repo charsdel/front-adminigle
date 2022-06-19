@@ -3,7 +3,7 @@
 >
 
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-    <form (ngSubmit)="onRegister()" #myForm="ngForm" (keydown)="EnterSubmit($event)">
+    <form [formGroup]="profileForm" (ngSubmit)="onRegister()" (keydown)="EnterSubmit($event)">
 
       <!-- Toggle A -->
       <div class="sticky top-1 z-10 bg-yellow-500 ">
@@ -46,7 +46,7 @@
       <div class="flex flex-wrap">
         <div class="w-full lg:w-4/12 px-4">
           <div class="relative w-full mb-3">
-            <div class="">
+            
             <label
               class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
               htmlFor="grid-password"
@@ -55,12 +55,10 @@
             </label>
             <input
                 id="name"
-                name="name"
+                formControlName="firstName"
                 type="text"
-                #name
-                [(ngModel)]="member.name"
                 placeholder="Nombre Completo"
-                [disabled]="toogleEdit"
+                
 
                 [ngClass]="
           
@@ -80,16 +78,14 @@
             >
               Profesion
             </label>
-            </div>
+           
             
             <input
             id="profession"
-            name="profession"
+            formControlName="profession"
             type="text"
             placeholder="Profesion"
-            [disabled]="toogleEdit"
 
-            [(ngModel)]="member.profession"
             [ngClass]="
           
             toogleEdit
@@ -105,7 +101,7 @@
               <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
               <img [src]="url" *ngIf="url" class=" .image_placeholder h-40 w-25 rounded-lg" >
             
-              <p *ngIf="toogleEdit">
+              <p *ngIf="!toogleEdit">
                 <input type="file" (change)="showPreview($event)">
               </p>
             </div>
@@ -119,10 +115,8 @@
 
             <select 
               id="memberStatus"
-              name="menberStatus"
+              formControlName="memberStatus"            
               type="text"
-              [(ngModel)]="member.status"
-              [disabled]="toogleEdit"
 
               [ngClass]="
           
@@ -162,11 +156,9 @@
             </label>
             <input
               id="nationalId"
-              name="nationalId"
-              [(ngModel)]="member.nationalId"
+              formControlName="nationalId"
               type="text"
               required
-              [disabled]="toogleEdit"
 
               [ngClass]="
           
@@ -187,10 +179,8 @@
             </label>
             <input
               id="adress"
-              name="adress"
-              [(ngModel)]="member.adress"
-              [disabled]="toogleEdit"
-              #adress
+              formControlName="adress"
+              
               type="text"
               [ngClass]="
           
@@ -210,11 +200,7 @@
             </label>
             <input
               id="mail"
-              name="mail"
-              [(ngModel)]="member.mail"
-              [disabled]="toogleEdit"
-
-              #mail
+              formControlName="mail"
               type="email"
               [ngClass]="
           
@@ -234,11 +220,9 @@
             </label>
             <input
               id="phone"
-              name="phone"
-              [(ngModel)]="member.phoneNumber"
-              #phone
+              formControlName="phone"
+            
               type="text"
-              [disabled]="toogleEdit"
 
               [ngClass]="
           
@@ -258,11 +242,9 @@
             </label>
             <input
               id="age"
-              name="age"
-              [(ngModel)]="member.age"
-              #age
+              formControlName="age"
+            
               type="number"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -281,9 +263,7 @@
             <input
               id="nationality"
               name="nationality"
-              [(ngModel)]="member.nationality"
-              #nationality
-              [disabled]="toogleEdit"
+              formControlName="nationality"
               [ngClass]="
           
               toogleEdit
@@ -301,10 +281,8 @@
             </label>
             <select
               id="civilStatus"
-              name="civilStatus"
-              [(ngModel)]="member.civilStatus"
+              formControlName="civilStatus"
               type="text"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -329,10 +307,8 @@
             </label>
             <select
               id="gender"
-              name="gender"
+              formControlName="gender"
               type="text"
-              [(ngModel)]="member.gender"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -355,10 +331,8 @@
             </label>
             <input
               id="born"
-              name="born"
-              [(ngModel)]="member.born"
+              formControlName="born"
               type="date"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -396,10 +370,8 @@
 
             <select
             id="sede"
-            name="sede"
+            formControlName="sedeId"
             type="text"
-            [(ngModel)]="member.sedeId"
-            [disabled]="toogleEdit"
             (change)="sedeChange($event)"
             [ngClass]="
           
@@ -433,11 +405,9 @@
 
             <select
             id="netName"
-            name="netName"
-            [(ngModel)]="member.netId"
+            formControlName="netId"
             type="text"
             
-            [disabled]="toogleEdit"
             (change)="netChange($event)"
             [ngClass]="
           
@@ -473,10 +443,8 @@
 
             <select
             id="homeName"
-            name="homeName"
-            [(ngModel)]="member.homeId"
+            formControlName="homeId"
             type="text"
-            [disabled]="toogleEdit"
             [ngClass]="
           
               toogleEdit
@@ -501,10 +469,8 @@
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Ocupacion</label>
             <select 
               id="occupation"
-              name="occupation"
-              [(ngModel)]="member.occupation"
+              formControlName="occupation"
               type="text"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -526,6 +492,7 @@
                 <option>PASTOR</option>
                 <option>SERVIDOR</option>
                 <option>VISITANTE</option>
+                <option>MAESTRO</option>
                 <option>OTROS</option>
   
                
@@ -546,13 +513,11 @@
             <input 
               id="spiritualBirthDate"
               placeholder="Select date"
-              name="spiritualBirthDate"
+              formControlName="spiritualBirthDate"
               type="date"
               value="2018-07-22"
               min="1940-01-01"
               max="2030-12-31"
-              [(ngModel)]="member.spiritualBirthDate"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -575,10 +540,9 @@
             <input
               id="churchBorn"
               name="churchBorn"
-              [(ngModel)]="member.churchBorn"
-              #churchBorn
+              formControlName="churchBorn"
+              
               type="text"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -602,10 +566,8 @@
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Es bautizado ?</label>
             <select
               id="baptized"
-              name="baptized"
+              formControlName="baptized"
               type="text"
-              [(ngModel)]="member.baptized"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -632,13 +594,11 @@
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Bautizmo</label>
             <input
               id="christeningDate"
-              name="christeningDate"
+              formControlName="christeningDate"
               type="date"
               value=""
               min="1940-01-01"
               max="2030-12-31"
-              [(ngModel)]="member.christeningDate"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -661,11 +621,8 @@
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Iglesia de Bautiso</label>
             <input
               id="churchWaterChristening"
-              name="churchWaterChristening"
-              #churchWaterChristening
+              formControlName="churchWaterChristening"
               type="text"
-              [(ngModel)]="member.churchWaterChristening"
-              [disabled]="toogleEdit"
               [ngClass]="
           
               toogleEdit
@@ -705,12 +662,11 @@
             </label>
             <textarea
               id="pastServiceArea"
-              name="pastServiceArea"
-              #pastServiceArea
+              formControlName="pastServiceArea"
               type="text"
-              [(ngModel)]="member.pastServiceArea"
+              
 
-              [disabled]="toogleEdit"
+             
               rows="4"
               [ngClass]="
           
@@ -736,11 +692,10 @@
             </label>
             <textarea
               id="currentServiceArea"
-              name="currentServiceArea"
-              #currentServiceArea
+              
+              formControlName="currentServiceArea"
               type="text"
-              [(ngModel)]="member.currentServiceArea"
-              [disabled]="toogleEdit"
+              
               rows="4"
               [ngClass]="
           
@@ -766,88 +721,132 @@
         <hr class=" border-b-1 border-blueGray-300 mb-8"  />
       
         <div class="flex flex-wrap">
-          <div class="w-full lg:w-4/12 px-4">
 
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Discipulado Aprobado ?</label>
- 
-              <select
-                id="approvedDiscipleship"
-                name="approvedDiscipleship"
-                type="number"
-                [(ngModel)]="member.approvedDiscipleship"
-                [disabled]="toogleEdit"
-                [ngClass]="
-            
-                toogleEdit
-                    ? 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
-                    bg-white rounded text-sm shadow  w-full'
-                    : 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
-                    bg-green-200 rounded text-sm shadow focus:outline-none focus:ring w-full
-                    ease-linear transition-all duration-150'
-                  ">
-    
-              
-                  <option>Si</option>
-                  <option>No</option>
-      
-              </select>
-            </div>
-  
+
+         
+
+          <div class="relative w-full lg:w-12/12 px-4 mb-10">
+             
+            <button type="button" class="absolute right-0 bg-blue-600 text-white  font-bold uppercase  text-xs py-2 px-2  rounded " (click)="addStudies()">+ Agregar Estudios</button>
+
           </div>
-  
-          <div class="w-full lg:w-4/12 px-4">
-
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Aprobacion</label>
-              <input
-                id="dicipulateApprovalDate"
-                name="dicipulateApprovalDate"
-                type="date"
-                value=""
-                min="1940-01-01"
-                max="2030-12-31"
-                [(ngModel)]="member.dicipulateApprovalDate"
-                [disabled]="toogleEdit"
-                [ngClass]="
-            
-                toogleEdit
-                    ? 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
-                    bg-white rounded text-sm shadow  w-full'
-                    : 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
-                    bg-green-200 rounded text-sm shadow focus:outline-none focus:ring w-full
-                    ease-linear transition-all duration-150'
-                  "> 
-              
-            </div>
 
           
-          </div>
+          
+        </div>    
+        
+        <div formArrayName="studies">
+          
 
-          <div class="w-full lg:w-4/12 px-4">
+          
+        
+          <div *ngFor="let study of studies.controls; let i=index">
+            <!-- The repeated alias template -->
+            <ng-container [formGroupName]="i">
 
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Maestro</label>
-              <input
-                id="discipleshipTeacher"
-                name="discipleshipTeacher"
-                #discipleshipTeacher
-                type="text"
-                [(ngModel)]="member.discipleshipTeacher"
-                [disabled]="toogleEdit"
-                [ngClass]="
+              <div class="flex flex-wrap border-2">
+
+         
+
+
+                <div class="w-full lg:w-4/12 px-4">
+      
+                  <div class="relative w-full mb-3">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Area Aprobado </label>
+       
+                    <input
+                      id="approvedDiscipleship"
+                      formControlName="materia"
+                      type="text"
+                      
+                      [ngClass]="
+                  
+                      toogleEdit
+                          ? 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                          bg-white rounded text-sm shadow  w-full'
+                          : 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                          bg-green-200 rounded text-sm shadow focus:outline-none focus:ring w-full
+                          ease-linear transition-all duration-150'
+                        "/>
+                    
+          
+                    
+                       
             
-                toogleEdit
-                    ? 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
-                    bg-white rounded text-sm shadow  w-full'
-                    : 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
-                    bg-green-200 rounded text-sm shadow focus:outline-none focus:ring w-full
-                    ease-linear transition-all duration-150'
-                  ">
+                   
+                  </div>
+        
+                </div>
+               
+        
+                <div class="w-full lg:w-4/12 px-4">
+      
+                  <div class="relative w-full mb-3">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Fecha de Aprobacion</label>
+                    <input
+                      id="dicipulateApprovalDate"
+                      formControlName="fecha"
+                      type="date"
+                      value=""
+                      min="1940-01-01"
+                      max="2030-12-31"
+                      
+                      [ngClass]="
+                  
+                      toogleEdit
+                          ? 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                          bg-white rounded text-sm shadow  w-full'
+                          : 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                          bg-green-200 rounded text-sm shadow focus:outline-none focus:ring w-full
+                          ease-linear transition-all duration-150'
+                        "/> 
+                    
+                  </div>
+      
+                
+                </div>
+      
+                <div class="w-full lg:w-3/12 px-4">
+      
+                  <div class="relative w-full mb-3">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">Maestro</label>
+                    <input
+                      id="discipleshipTeacher"
+                      formControlName="maestro"
+                      type="text"
+                      
+                      [ngClass]="
+                  
+                      toogleEdit
+                          ? 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                          bg-white rounded text-sm shadow  w-full'
+                          : 'border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600
+                          bg-green-200 rounded text-sm shadow focus:outline-none focus:ring w-full
+                          ease-linear transition-all duration-150'
+                        "/>
+      
+                  </div>
+                </div>
+                <button type="button" class="text-red-600 w-full lg:w-1/12 " (click)="deleteStudies(i)" ><i
+                  class="fas fa-trash mr-2   "
+                 
+                ></i></button> 
+      
+               
+                
+              </div>
+              <br> 
+              
+              
+             
 
-            </div>
+
+          </ng-container>
           </div>
         </div>
+
+
+       
     </form>
   </div>
 </div>

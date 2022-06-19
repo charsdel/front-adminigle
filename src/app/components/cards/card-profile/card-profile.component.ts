@@ -4,9 +4,9 @@ import { Member } from '../../../models/member.model';
 import { MembersService } from '../../../services/members.service';
 import { NotificationService } from '../../../services/notification.service';
 
-import { HttpHeaders } from '@angular/common/http';
 
 
+import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 
 
 
@@ -16,51 +16,6 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./card-profile.component.scss']
 })
 export class CardProfileComponent implements OnInit {
-
-
-  toogleEdit : boolean = true;
-  
-  
-  //para hacer e bloqueo individual de campos y el @viewchild es para activar el onfocus en la propiedad y titile el cursor dentro del input
-  /*
-  inputnationalIdDisabled : boolean = true;
-  inputNameDisabled : boolean = true ;inputProfessionDisabled: boolean = true ;inputAdressDisabled : boolean = true; inputSedeDisabled : boolean = true; inputNetDisabled : boolean = true;
-  inputHomeDisabled : boolean = true; inputOccupationDisabled : boolean = true; inputMailDisabled : boolean = true;
-  inputPhoneDisabled: boolean = true; inputAgeDisabled: boolean = true;inputNationalityDisabled: boolean = true;
-  inputCivilsDisabled: boolean = true; inputGenderDisabled: boolean = true; inputBornDisabled : boolean = true;
-  inputSpiritualBdDisabled: boolean = true; inputchurchBornDisabled: boolean = true;inputBaptizedDisabled: boolean = true;
-  inputchurchWcDisabled: boolean = true;inputBatizedChurchDisabled: boolean = true;inputPastServicesDisabled: boolean = true;
-  inputCurrentServiceAreaDisabled: boolean = true; inputholaDisabled : boolean = true;inputchristeningDateDisabled:boolean = true;
-  inputapprovedDiscipleshipDisabled: boolean = true; inputdicipulateApprovalDateDisabled : boolean = true; 
-  inputdiscipleshipTeacherDisabled: boolean = true;inputMemberStatusDisabled: boolean= true;
-
-  @ViewChild("nationalId") nationalId!: ElementRef;
-  @ViewChild("name") name!: ElementRef; @ViewChild("profession") profession!: ElementRef; 
-  @ViewChild("adress") adress!: ElementRef;@ViewChild("mail") mail!: ElementRef;
-  @ViewChild("phone") phone!: ElementRef;@ViewChild("age") age!: ElementRef;
-  @ViewChild("nationality") nationality!: ElementRef;
-  
-  @ViewChild("churchBorn") churchBorn!: ElementRef; @ViewChild("churchWaterChristening") churchWaterChristening!: ElementRef;
-  @ViewChild("pastServiceArea") pastServiceArea!: ElementRef; @ViewChild("currentServiceArea") currentServiceArea!: ElementRef;
-  @ViewChild("discipleshipTeacher") discipleshipTeacher!: ElementRef;*/
-
-  value:boolean= true
-  sedes: Array<any> = [];  
-  nets : Array<any> = []
-  selectedNets: Array<any> = []
-  selectedHomes: Array<any> = []
-
-  homes: Array<any> = []
-
-
-
-  //subir imagen
-  url: any; //Angular 11, for stricter type
-	msg = "";
-
-  filedata:any;
-  image:any
-
 
 
   @Input() member : Member = {
@@ -103,15 +58,106 @@ export class CardProfileComponent implements OnInit {
     baptized: ''
 
   }
-  http: any;
+
+
+
+
+  toogleEdit : boolean = true;
+  
+  
+  //para hacer e bloqueo individual de campos y el @viewchild es para activar el onfocus en la propiedad y titile el cursor dentro del input
+  /*
+  inputnationalIdDisabled : boolean = true;
+  inputNameDisabled : boolean = true ;inputProfessionDisabled: boolean = true ;inputAdressDisabled : boolean = true; inputSedeDisabled : boolean = true; inputNetDisabled : boolean = true;
+  inputHomeDisabled : boolean = true; inputOccupationDisabled : boolean = true; inputMailDisabled : boolean = true;
+  inputPhoneDisabled: boolean = true; inputAgeDisabled: boolean = true;inputNationalityDisabled: boolean = true;
+  inputCivilsDisabled: boolean = true; inputGenderDisabled: boolean = true; inputBornDisabled : boolean = true;
+  inputSpiritualBdDisabled: boolean = true; inputchurchBornDisabled: boolean = true;inputBaptizedDisabled: boolean = true;
+  inputchurchWcDisabled: boolean = true;inputBatizedChurchDisabled: boolean = true;inputPastServicesDisabled: boolean = true;
+  inputCurrentServiceAreaDisabled: boolean = true; inputholaDisabled : boolean = true;inputchristeningDateDisabled:boolean = true;
+  inputapprovedDiscipleshipDisabled: boolean = true; inputdicipulateApprovalDateDisabled : boolean = true; 
+  inputdiscipleshipTeacherDisabled: boolean = true;inputMemberStatusDisabled: boolean= true;
+
+  @ViewChild("nationalId") nationalId!: ElementRef;
+  @ViewChild("name") name!: ElementRef; @ViewChild("profession") profession!: ElementRef; 
+  @ViewChild("adress") adress!: ElementRef;@ViewChild("mail") mail!: ElementRef;
+  @ViewChild("phone") phone!: ElementRef;@ViewChild("age") age!: ElementRef;
+  @ViewChild("nationality") nationality!: ElementRef;
+  
+  @ViewChild("churchBorn") churchBorn!: ElementRef; @ViewChild("churchWaterChristening") churchWaterChristening!: ElementRef;
+  @ViewChild("pastServiceArea") pastServiceArea!: ElementRef; @ViewChild("currentServiceArea") currentServiceArea!: ElementRef;
+  @ViewChild("discipleshipTeacher") discipleshipTeacher!: ElementRef;*/
+
+  value:boolean= true
+  sedes: Array<any> = []
+  nets : Array<any> = []
+  homes: Array<any> = []
+  selectedNets: Array<any> = []
+  selectedHomes: Array<any> = []
 
   
 
+  //subir imagen
+  url: any; //Angular 11, for stricter type
+	msg = "";
+
+  filedata:any;
+  image:any
+
+
+
+  
+  http: any;
+
+  
+  profileForm = new FormGroup({ })
 
  
-  constructor(private membersService: MembersService,private notifyService : NotificationService) {
+ 
+  constructor(private membersService: MembersService,private notifyService : NotificationService,private fb: FormBuilder) {
 
-    //cargo la imagen de usurio por defecto
+
+
+    this.profileForm = this.fb.group({
+      firstName: [],
+      profession: [],
+      memberStatus: [],
+      nationalId: [],
+      adress: [],
+      mail: [],
+      phone: [],
+      age: [],
+      nationality: [],
+      civilStatus: [],
+      gender: [],
+      born: [],
+      sedeId: [],
+      netId: [],
+      homeId: [],
+      occupation: [],
+      spiritualBirthDate: [],
+      churchBorn: [],
+      baptized: [],
+      christeningDate: [],
+      churchWaterChristening: [],
+      pastServiceArea: [],
+      currentServiceArea: [],
+      approvedDiscipleship: [],
+      dicipulateApprovalDate: [],
+      discipleshipTeacher: [],
+      studies: this.fb.array([
+        this.fb.group({
+          materia: [''],
+          fecha: [''],
+          maestro: ['']      
+        })
+      ])
+  
+    })  
+
+    
+
+
   }
   
 
@@ -134,8 +180,113 @@ export class CardProfileComponent implements OnInit {
     
       this.selectedNets =  this.setSelectNets(this.member.sedeId,this.nets);
       this.selectedHomes =  this.setSelectHomes(this.member.netId);
+      
+      let studiesArray: any = null;
+      
+      //console.log('hola'+this.member.discipleshipTeacher)
 
-      //console.log(this.selectedHomes);
+     
+      
+      if( this.member.discipleshipTeacher!='')
+      {
+
+
+        try {
+          studiesArray = JSON.parse(this.member.discipleshipTeacher)
+        } catch (e) {
+          studiesArray = null
+        }
+        
+        /*if(this.member.discipleshipTeacher.search('/^[{/gi') != -1 )
+        {
+         
+
+        }*/
+      }
+
+      this.profileForm.setValue({
+        firstName: this.member.name, 
+        profession: this.member.profession,
+        memberStatus: this.member.status,
+        nationalId: this.member.nationalId,
+        adress: this.member.adress,
+        mail: this.member.mail,
+        phone: this.member.phoneNumber,
+        age: this.member.age,
+        nationality: this.member.nationality,
+        civilStatus: this.member.civilStatus,
+        gender: this.member.gender,
+        born: this.member.born,
+        sedeId: this.member.sedeId,
+        netId: this.member.netId,
+        homeId: this.member.homeId,
+        occupation: this.member.occupation,
+        spiritualBirthDate: this.member.spiritualBirthDate,
+        churchBorn: this.member.churchBorn,
+        baptized: this.member.baptized,
+        christeningDate: this.member.christeningDate,
+        churchWaterChristening: this.member.churchWaterChristening,
+        pastServiceArea: this.member.pastServiceArea,
+        currentServiceArea: this.member.currentServiceArea,
+        approvedDiscipleship: this.member.approvedDiscipleship,
+        dicipulateApprovalDate: this.member.dicipulateApprovalDate,
+        discipleshipTeacher: this.member.discipleshipTeacher,
+        studies: [{
+
+            materia:'',
+            fecha:'',
+            maestro:''
+        }]
+
+      }); 
+
+      
+      if(studiesArray!=null){
+        console.log("hola es distinto de null")
+
+
+        studiesArray.forEach((element: any,index :number) => {
+          console.log(index)
+
+          if(index == 0){
+
+              this.studies.setValue( [{
+
+                materia:element.materia,
+                fecha:element.fecha,
+                maestro:element.maestro
+            }])
+          }else{
+
+            this.studies.push(
+  
+              this.fb.group({
+                materia: [element.materia],
+                fecha: [element.fecha],
+                maestro: [element.maestro]
+                
+              })
+               
+        
+            );
+
+          }
+          
+        
+        });
+      
+      }
+
+      /*for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        
+      }*/
+
+      
+
+      
+      
+
 
     });
 
@@ -146,58 +297,97 @@ export class CardProfileComponent implements OnInit {
   }
 
 
+  //[{"materia":"asdasdas","fecha":"2022-06-29","maestro":"asdasdas"},{"materia":"wwwwwwwwwwwwwwww","fecha":"2022-06-23","maestro":"wwwwwwww"}]
+
+
+
+  get studies() {
+    return this.profileForm.get('studies') as FormArray;
+  }
  
+  addStudies() {
+
     
+
+    this.studies.push(
+
+      this.fb.group({
+        materia: [''],
+        fecha: [''],
+        maestro: ['']
+        
+      })
+       
+
+    );
+
+
+  }
+
+  deleteStudies(index: number) {
+
     
-    showToasterInfo(){
-        this.notifyService.showInfo("This is info", "tutsmake.com")
-    }
+
+    this.studies.removeAt(index);
+
+
+  }
     
-    showToasterWarning(){
-        this.notifyService.showWarning("This is warning", "tutsmake.com")
-    }
+  showToasterInfo(){
+      this.notifyService.showInfo("This is info", "tutsmake.com")
+  }
+    
+  showToasterWarning(){
+      this.notifyService.showWarning("This is warning", "tutsmake.com")
+  }
   
   onRegister() {
-    //console.log(this.member);
-    var myFormData = new FormData();
-    const headers = new HttpHeaders();
+      //console.warn(this.profileForm.value)
+      
+      
+      var myFormData = new FormData();
+      //const headers = new HttpHeaders();
 
 
-    if(this.filedata != null)
-    {
-      //console.log(this.filedata['name'])
-      this.image = this.filedata['name']; 
-      myFormData.append('image', this.filedata);
-    /* Image Post Request */
-
-      this.membersService.uploadImageProfile(myFormData);
-    }else{
-      console.log('no hay imagen')
-      if(this.member.pictureProfile == 'avatar.png')
+      if(this.filedata != null)
       {
-        this.image = 'avatar.png'; 
+        //console.log(this.filedata['name'])
+        this.image = this.filedata['name']; 
+        myFormData.append('image', this.filedata);
+       //Image Post Request 
+
+        this.membersService.uploadImageProfile(myFormData);
       }else{
-        this.image = this.member.pictureProfile
+        console.log('no hay imagen')
+        if(this.member.pictureProfile == 'avatar.png')
+        {
+          this.image = 'avatar.png'; 
+        }else{
+          this.image = this.member.pictureProfile
+        }
       }
-    }
-    
+      
 
 
 
-    //console.log(this.image)
-    const resul = this.membersService.updateMemberInfo(this.member,this.image);
+      //console.log(this.image)
+
+      //agregar el id al form
+      this.profileForm.addControl('memberId', new FormControl(this.member.memberId));
+
+      const resul = this.membersService.updateMemberInfo(this.profileForm.value,this.image);
 
 
-    console.log(resul)
-    if(resul == 'ok')
-    {
-      this.notifyService.showSuccess("Actualizado con Exito", "IgleSoft.com")
-    }else{
-      this.notifyService.showError("Error al Actualizar", "IgleSoft.com")
-    }
+      console.log(resul)
+      if(resul == 'ok')
+      {
+        this.notifyService.showSuccess("Actualizado con Exito", "IgleSoft.com")
+      }else{
+        this.notifyService.showError("Error al Actualizar", "IgleSoft.com")
+      }
 
-    //headers.append('Content-Type', 'multipart/form-data');
-    //headers.append('Accept', 'application/json');
+      //headers.append('Content-Type', 'multipart/form-data');
+      //headers.append('Accept', 'application/json');
   
   
    

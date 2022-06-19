@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { MembersService } from '../../../services/members.service';
 import { Member } from '../../../models/member.model';
 import { NotificationService } from '../../../services/notification.service';
+import { FormBuilder, FormControl, FormGroup, FormArray,Validators } from '@angular/forms';
 
 
 
@@ -66,7 +67,51 @@ export class ProfileSaveComponent implements OnInit {
   filedata:any;
   image:any
 
-  constructor(private membersService: MembersService,private notifyService : NotificationService) {
+
+  
+
+  profileForm = new FormGroup({ })
+
+  constructor(private membersService: MembersService,private notifyService : NotificationService,private fb: FormBuilder) {
+
+
+    this.profileForm = this.fb.group({
+      firstName: [],
+      profession: [],
+      memberStatus: ['Activo'],
+      nationalId: ['', [Validators.required]],
+      adress: [],
+      mail: [],
+      phone: [],
+      age: [],
+      nationality: [],
+      civilStatus: [],
+      gender: [],
+      born: [],
+      sedeId: [],
+      netId: [],
+      homeId: [],
+      occupation: [],
+      spiritualBirthDate: [],
+      churchBorn: [],
+      baptized: [],
+      christeningDate: [],
+      churchWaterChristening: [],
+      pastServiceArea: [],
+      currentServiceArea: [],
+      approvedDiscipleship: [],
+      dicipulateApprovalDate: [],
+      discipleshipTeacher: [],
+      studies: this.fb.array([
+        this.fb.group({
+          materia: [''],
+          fecha: [''],
+          maestro: ['']      
+        })
+      ])
+  
+    }) 
+
   }
 
   ngOnInit(): void {
@@ -116,7 +161,9 @@ export class ProfileSaveComponent implements OnInit {
   }
 
   onSave() {
-    //console.log(this.member);
+    console.log(this.profileForm.value);
+
+    
     var myFormData = new FormData();
 
 
@@ -126,25 +173,25 @@ export class ProfileSaveComponent implements OnInit {
       this.image = this.filedata['name']; 
       myFormData.append('image', this.filedata);
       this.member['pictureProfile'] = this.image
-    /* Image Post Request */
+     //Image Post Request 
 
       this.membersService.uploadImageProfile(myFormData);
     }else{
-      console.log('no hay imagen')
+      //console.log('no hay imagen')
       this.image = 'avatar.png'; 
 
     }
     
-    const resul = this.membersService.saveMemberInfo (this.member)
+    const resul = this.membersService.saveMemberInfo (this.profileForm.value, this.image)
     //this.membersService.updateMemberInfo(this.member,this.image);
 
-    console.log(resul)
+    //console.log(resul)
     if(resul && resul!='')
     {
       this.notifyService.showSuccess("Agregado con Exito", "IgleSoft.com")
     }else{
 
-      console.log(resul)
+      //console.log(resul)
 
       this.notifyService.showError("Error al Agregar", "IgleSoft.com")
     }
@@ -208,5 +255,37 @@ export class ProfileSaveComponent implements OnInit {
      return (this.selectedHomes)
      
    }
+
+   get studies() {
+    return this.profileForm.get('studies') as FormArray;
+    }
+ 
+    addStudies() {
+
+    
+
+    this.studies.push(
+
+      this.fb.group({
+        materia: [''],
+        fecha: [''],
+        maestro: ['']
+        
+      })
+       
+
+    );
+
+
+  }
+
+    deleteStudies(index: number) {
+
+    
+
+    this.studies.removeAt(index);
+
+
+  }
 
 }
